@@ -1,0 +1,315 @@
+/*
+ * Home Assistant styled ingress page
+ * Uses native HA theme variables automatically
+ */
+
+:root {
+  --app-primary-color: var(--primary-color);
+  --app-accent-color: var(--accent-color);
+  --app-bg-color: var(--primary-background-color);
+  --app-card-bg: var(--card-background-color);
+  --app-text-color: var(--primary-text-color);
+  --app-secondary-text: var(--secondary-text-color);
+  --app-divider-color: var(--divider-color);
+  --app-border-radius: 12px;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+
+  background: var(--app-bg-color);
+  color: var(--app-text-color);
+
+  font-family:
+    Roboto,
+    system-ui,
+    sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  width: 100%;
+  max-width: 1300px;
+  padding: 24px;
+}
+
+/* --------------------------------------------------
+ * Header
+ * -------------------------------------------------- */
+
+.header {
+  margin-bottom: 24px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.subtitle {
+  margin: 4px 0 0 0;
+  color: var(--app-secondary-text);
+  font-size: 14px;
+}
+
+/* --------------------------------------------------
+ * HA Card
+ * -------------------------------------------------- */
+
+.ha-card {
+  background: var(--app-card-bg);
+  border-radius: var(--app-border-radius);
+  border: 1px solid var(--app-divider-color);
+  box-shadow: var(
+    --ha-card-box-shadow,
+    0 2px 4px rgba(0, 0, 0, 0.12)
+  );
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.card-header {
+  padding: 20px 24px 0;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.card-content {
+  padding: 20px 24px 24px;
+}
+
+/* --------------------------------------------------
+ * Current info panel
+ * -------------------------------------------------- */
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--app-divider-color);
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  color: var(--app-secondary-text);
+  font-weight: 500;
+}
+
+.info-value {
+  font-weight: 500;
+}
+
+.empty-state {
+  color: var(--app-secondary-text);
+}
+
+/* --------------------------------------------------
+ * Table
+ * -------------------------------------------------- */
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: rgba(127, 127, 127, 0.06);
+}
+
+th {
+  text-align: left;
+  padding: 16px 20px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--app-secondary-text);
+  border-bottom: 1px solid var(--app-divider-color);
+}
+
+td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--app-divider-color);
+  vertical-align: middle;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr.current-period {
+  background: rgba(3, 169, 244, 0.08);
+}
+
+tbody tr:hover {
+  background: rgba(127, 127, 127, 0.05);
+}
+
+/* --------------------------------------------------
+ * Inputs
+ * -------------------------------------------------- */
+
+input[type="date"],
+input[type="number"] {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--app-bg-color);
+  color: var(--app-text-color);
+  border: 1px solid var(--app-divider-color);
+  border-radius: 10px;
+  font-size: 14px;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    background 0.2s;
+}
+
+input[type="date"]:focus,
+input[type="number"]:focus {
+  outline: none;
+  border-color: var(--app-primary-color);
+  box-shadow: 0 0 0 2px rgba(3, 169, 244, 0.2);
+}
+
+/* --------------------------------------------------
+ * Buttons
+ * -------------------------------------------------- */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.ha-button {
+  border: none;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    opacity 0.2s,
+    transform 0.15s;
+}
+
+.ha-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.ha-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ha-button.primary {
+  background: var(--app-primary-color);
+  color: var(--text-primary-color);
+}
+
+.ha-button.primary:hover:not(:disabled) {
+  background: var(--app-accent-color);
+}
+
+.ha-button.secondary {
+  background: transparent;
+  color: var(--app-primary-color);
+  border: 1px solid var(--app-primary-color);
+}
+
+.ha-button.secondary:hover:not(:disabled) {
+  background: rgba(3, 169, 244, 0.1);
+}
+
+/* --------------------------------------------------
+ * Status message
+ * -------------------------------------------------- */
+
+.status-message {
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  font-size: 14px;
+}
+
+.status-message.info {
+  background: rgba(3, 169, 244, 0.1);
+  border-color: rgba(3, 169, 244, 0.25);
+}
+
+.status-message.success {
+  background: rgba(67, 160, 71, 0.12);
+  border-color: rgba(67, 160, 71, 0.3);
+}
+
+.status-message.error {
+  background: rgba(229, 57, 53, 0.12);
+  border-color: rgba(229, 57, 53, 0.3);
+}
+
+.hidden {
+  display: none;
+}
+
+/* --------------------------------------------------
+ * Mobile
+ * -------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .content {
+    padding: 16px;
+  }
+
+  th,
+  td {
+    padding: 12px;
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+}

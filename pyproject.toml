@@ -1,0 +1,33 @@
+[project]
+name = "energy-prices-manager"
+version = "1.0.0"
+description = "Home Assistant custom integration to manage energy prices of variable/fixed dutch energy contracts"
+readme = "README.md"
+requires-python = ">=3.14.2"
+license = "AGPL-3.0-only"
+dependencies = [
+  "homeassistant>=2026.7.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=9.1.1",
+  "pytest-cov>=7.1",
+  "ruff>=0.15.22",
+  "ty>=0.0.62",
+]
+
+[tool.pytest.ini_options]
+python_files = ["test_*.py", "*_test.py"]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py314"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "SIM", "FBT"]
+ignore = ["E501"]
+
+[tool.ty.environment]
+python-version = "3.14"

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 280" role="img" aria-labelledby="title desc">
+  <title id="title">Energy Prices Manager</title>
+  <desc id="desc">Energy Prices Manager logo with its energy meter icon</desc>
+  <defs>
+    <linearGradient id="logo-background" x1="0" y1="0" x2="1200" y2="280" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#123752"/>
+      <stop offset="1" stop-color="#075B69"/>
+    </linearGradient>
+    <linearGradient id="icon-background" x1="28" y1="28" x2="252" y2="252" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#123752"/>
+      <stop offset="1" stop-color="#075B69"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="129" y1="84" x2="160" y2="199" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE18A"/>
+      <stop offset="1" stop-color="#FFB703"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="280" rx="56" fill="url(#logo-background)"/>
+  <g transform="translate(28 28) scale(.875)">
+    <rect width="256" height="256" rx="56" fill="url(#icon-background)"/>
+    <circle cx="128" cy="128" r="78" fill="none" stroke="#76E4DB" stroke-width="12"/>
+    <path d="M140 44 78 139h45l-8 73 63-101h-45z" fill="url(#bolt)"/>
+    <path d="M63 179h27M166 179h27" fill="none" stroke="#76E4DB" stroke-linecap="round" stroke-width="10"/>
+  </g>
+  <text x="294" y="132" fill="#F4FBFB" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="700" letter-spacing="-1.5">Energy Prices Manager</text>
+  <text x="298" y="188" fill="#76E4DB" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="600" letter-spacing="0.4">Manage electricity and gas tariff periods</text>
+</svg>

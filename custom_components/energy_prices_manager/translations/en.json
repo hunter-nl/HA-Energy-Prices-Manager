@@ -1,0 +1,19 @@
+{
+  "title": "Add Energy Prices Manager",
+  "step": {
+    "init": {
+      "title": "Add Energy Prices Manager",
+      "description": "Configure energy tariff periods for electricity (T1/T2) and gas. Prices are managed via the web interface.",
+      "data": {
+        "name": "Display Name"
+      },
+      "name": "name"
+    }
+  },
+  "abort": {
+    "already_configured": "Energy Prices Manager is already configured."
+  },
+  "config": {
+    "name": "Energy Prices Manager"
+  }
+}

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Energy Prices Manager</title>
+
+    <!-- Home Assistant fonts/icons -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="page">
+      <div class="content">
+        <header class="header">
+          <div class="header-left">
+            <img src="icon.png" alt="Energy Manager" class="header-icon" />
+            <div>
+              <h1>Energy Prices Manager</h1>
+              <p class="subtitle">
+                Configure electricity and gas tariff periods
+              </p>
+            </div>
+          </div>
+        </header>
+
+        <section class="ha-card current-card">
+          <div class="card-header">
+            <h2>Current active period</h2>
+          </div>
+
+          <div id="current-info" class="card-content">
+            <div class="empty-state">Loading current period…</div>
+          </div>
+        </section>
+
+        <section class="ha-card">
+          <div class="table-wrapper">
+            <table id="periods-table">
+              <thead>
+                <tr>
+                  <th>Start date</th>
+                  <th>End date</th>
+                  <th>Low electricity T1 (€)</th>
+                  <th>High electricity T2 (€)</th>
+                  <th>Gas (€)</th>
+                  <th></th>
+                </tr>
+              </thead>
+
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+
+        <div class="actions">
+          <button id="add-row" class="ha-button secondary">➕ Add Row</button>
+
+          <button id="reset-btn" class="ha-button secondary" type="button">
+            ↺ Reset
+          </button>
+
+          <button id="save-btn" class="ha-button primary" disabled>
+            💾 Save
+          </button>
+        </div>
+
+        <div id="status-message" class="status-message hidden"></div>
+      </div>
+    </div>
+    <script>
+      function applyHATheme() {
+        try {
+          const parentStyles = getComputedStyle(
+            window.parent.document.documentElement,
+          );
+
+          const vars = [
+            "--primary-background-color",
+            "--card-background-color",
+            "--primary-text-color",
+            "--secondary-text-color",
+            "--divider-color",
+            "--primary-color",
+            "--accent-color",
+          ];
+
+          vars.forEach((v) => {
+            const value = parentStyles.getPropertyValue(v);
+
+            if (value) {
+              document.documentElement.style.setProperty(v, value);
+            }
+          });
+        } catch (e) {
+          console.warn("HA theme inheritance failed", e);
+        }
+      }
+
+      applyHATheme();
+    </script>
+    <script src="app.js"></script>
+  </body>
+</html>

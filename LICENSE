@@ -1,0 +1,116 @@
+GNU AFFERO GENERAL PUBLIC LICENSE
+Version 3, 19 November 2007
+
+Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/\>
+
+Everyone is permitted to copy and distribute verbatim copies of this license
+document, but changing it is not allowed.
+
+## Preamble
+
+The GNU Affero General Public License is a free software license, similar in most
+respects to the GNU General Public License v3, but with the requirement that
+modified versions be made available to users even if the software is run on a
+server.
+
+## TERMS AND CONDITIONS
+
+### 0. Definitions.
+
+"This License" refers to version 3 of the GNU Affero General Public License.
+
+"Copyright" also means copyright-like laws that apply to other kinds of works,
+such as mask designs and semiconductor mask works.
+
+### 1. Source Code.
+
+The "source code" for a work means the preferred form of the work for making
+modifications to it.
+
+### 2. Basic Permissions.
+
+All rights granted under this License are granted for the term of copyright on
+the Program, and are irrevocable provided the stated conditions are met.
+
+### 3. Protecting Users' Legal Rights From Anti-Circumvention Law.
+
+No covered work shall be deemed part of an effective technological measure under
+any applicable law fulfilling obligations under article 11 of the WIPO Copyright
+Treaty adopted on 20 December 1996, or similar laws prohibiting or restricting
+circumvention of such measures.
+
+### 4. Conveying Verbatim Copies.
+
+You may convey verbatim copies of the Program's source code as you receive it,
+in any medium, provided that you conspicuously and appropriately publish on each
+copy an appropriate copyright notice; keep intact all notices stating that this
+License and any non-permissive terms added by the recipient are applicable; do
+not offer any of the foregoing restrictions except as expressly permitted; and
+keep intact all notices and disclaimer.
+
+### 5. Conveying Modified Source Versions.
+
+You may produce and convey modified versions of the source code of the Program,
+provided that you comply with the conditions of sections 2-4 of this License.
+
+### 6. Conveying Non-Source Forms.
+
+You may convey a non-source form of the Program, provided you comply with the
+conditions of section 5 above and the additional conditions below.
+
+### 7. Conveying Source Code.
+
+You may convey the source code of the Program using the `make install` command or
+equivalent, provided you also meet the following conditions:
+
+a) The resulting installation must permit user modification of the Program.
+
+b) The installation must permit the user to install or replace the Program using
+only standard tools.
+
+### 8. Termination.
+
+You may not copy, modify, sublicense, or distribute the Program except as
+expressly provided under this License. Any attempt otherwise to copy, modify,
+sublicense, or distribute the Program is void, and will automatically terminate
+your rights under this License.
+
+### 9. Acceptance Not Required for Copies.
+
+You are not required to accept this License since you have not signed it.
+However, nothing else grants you permission to modify or distribute the Program
+or its derivative works.
+
+### 10. Revised Versions of the License.
+
+The Free Software Foundation may publish revised and/or new versions of the GNU
+Affero General Public License from time to time. Such new versions will be
+similar in spirit to the present version, but may differ in detail to address
+new problems.
+
+### 11. Use of the License with Other Free Software Products.
+
+You may combine covered code with programs that are subject to other free
+software licenses, provided that you comply with the terms of this License in
+your side of the combination.
+
+## END OF TERMS AND CONDITIONS
+
+### APPENDIX: How to apply these terms to your work
+
+    Matter Label Guard - Home Assistant custom integration for protecting
+    Matter node labels.
+    Copyright (C) 2026 JunoBox B.V.
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as published
+    by the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program. If not, see <https://www.gnu.org/licenses/\>.
