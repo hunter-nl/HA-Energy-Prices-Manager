@@ -1,9 +1,34 @@
-![Energy Prices Manager](brand/logo.svg)
+<img src="brand/logo.svg" alt="Energy Prices Manager" style="max-width: 1000px;">
 If you find this project useful, consider supporting its development:
 
 <a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;"></a>
 
 # Changelog
+## [v1.0.1](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v1.0.1)
+
+
+
+
+
+
+### :question: Miscellaneous
+
+- [Chore(brand): add raster image assets](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/6) ([#6](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/6))
+
+
+
+
+
+### :bug: Fixes
+
+- [Fix: Update logo format and release process](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/7) ([#7](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/7))
+
+
+
+
+
+
+
 ## [v1.0.0](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v1.0.0)
 
 
@@ -17,6 +42,11 @@ If you find this project useful, consider supporting its development:
 
 
 
+
+
+### :question: Miscellaneous
+
+- [Chore(release): 1.0.0](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/5) ([#5](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/5))
 
 
 
@@ -42,6 +72,11 @@ If you find this project useful, consider supporting its development:
 
 
 ## ❤️ New Contributors
+
+
+* @releases-manager[bot] made their first contribution
+
+in [#5](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/5)
 
 
 * @hunter-nl made their first contribution
