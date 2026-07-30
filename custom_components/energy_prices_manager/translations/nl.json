@@ -1,19 +1,14 @@
 {
-   "title": "Energy Prices Manager toevoegen",
-   "step": {
-     "init": {
-       "title": "Energy Prices Manager toevoegen",
-       "description": "Configureer energietarieven voor elektriciteit (T1/T2) en gas. Prijzen worden beheerd via de webinterface.",
-       "data": {
-         "name": "Weergavenaam"
-       },
-       "name": "name"
-     }
-   },
-   "abort": {
-     "already_configured": "Energy Prices Manager is al geconfigureerd."
-   },
-   "config": {
-     "name": "Energy Prices Manager"
-   }
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "name": "Naam"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "Energy Prices Manager is al geconfigureerd."
+    }
+  }
 }

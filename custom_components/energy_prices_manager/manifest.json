@@ -2,13 +2,12 @@
   "name": "Energy Prices Manager",
   "version": "1.0.0",
   "domain": "energy_prices_manager",
-  "integration_type": "integration",
+  "integration_type": "service",
   "config_flow": true,
   "documentation": "https://github.com/hunter-nl/HA-Energy-Prices-Manager",
   "issue_tracker": "https://github.com/hunter-nl/HA-Energy-Prices-Manager/issues",
-  "dependencies": [],
+  "dependencies": ["frontend", "http"],
   "codeowners": ["@hunter-nl"],
   "requirements": [],
-  "iot_class": "local_polling",
-  "homeassistant": "2026.7.0"
+  "iot_class": "local_polling"
 }
