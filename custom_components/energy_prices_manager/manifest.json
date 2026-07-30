@@ -1,9 +1,14 @@
 {
   "domain": "energy_prices_manager",
   "name": "Energy Prices Manager",
-  "codeowners": ["@hunter-nl"],
+  "codeowners": [
+    "@hunter-nl"
+  ],
   "config_flow": true,
-  "dependencies": ["frontend", "http"],
+  "dependencies": [
+    "frontend",
+    "http"
+  ],
   "documentation": "https://github.com/hunter-nl/HA-Energy-Prices-Manager",
   "integration_type": "service",
   "iot_class": "local_polling",
