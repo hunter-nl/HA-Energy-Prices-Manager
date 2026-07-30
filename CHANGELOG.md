@@ -44,14 +44,6 @@ If you find this project useful, consider supporting its development:
 
 
 
-### :question: Miscellaneous
-
-- [Chore(release): 1.0.0](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/5) ([#5](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/5))
-
-
-
-
-
 ### :bug: Fixes
 
 - [Update manifest and restructure translation configuration](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/3) ([#3](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/3))
@@ -72,11 +64,6 @@ If you find this project useful, consider supporting its development:
 
 
 ## ❤️ New Contributors
-
-
-* @releases-manager[bot] made their first contribution
-
-in [#5](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/5)
 
 
 * @hunter-nl made their first contribution
