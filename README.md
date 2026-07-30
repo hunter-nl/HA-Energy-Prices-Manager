@@ -1,6 +1,6 @@
 # Energy Prices Manager for Home Assistant
 
-![Energy Prices Manager](brand/logo.svg)
+<img src="brand/logo.svg" alt="Energy Prices Manager" style="max-width: 1000px;">
 
 [![Release][release-badge]][release-url]
 [![Validate][validate-badge]][validate-url]
@@ -54,9 +54,9 @@ changes, Home Assistant starts, or a new day begins.
 
 ### HACS (Recommended)
 
-1. Open **HACS** → **Integrations** → **⋮** → **Custom repositories**
+1. Open **HACS** → **⋮** → **Custom repositories**
 2. Add repository: `hunter-nl/HA-Energy-Prices-Manager`, category: **Integration**
-3. Find **Energy Prices Manager** and install it
+3. Find **Energy Prices Manager** and download it
 4. Restart Home Assistant
 5. Add **Energy Prices Manager** in **Settings → Devices & services → Add
    integration** and submit it.
