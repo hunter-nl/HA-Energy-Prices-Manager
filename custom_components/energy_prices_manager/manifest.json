@@ -1,13 +1,13 @@
 {
-  "name": "Energy Prices Manager",
-  "version": "1.0.0",
   "domain": "energy_prices_manager",
-  "integration_type": "service",
-  "config_flow": true,
-  "documentation": "https://github.com/hunter-nl/HA-Energy-Prices-Manager",
-  "issue_tracker": "https://github.com/hunter-nl/HA-Energy-Prices-Manager/issues",
-  "dependencies": ["frontend", "http"],
+  "name": "Energy Prices Manager",
   "codeowners": ["@hunter-nl"],
+  "config_flow": true,
+  "dependencies": ["frontend", "http"],
+  "documentation": "https://github.com/hunter-nl/HA-Energy-Prices-Manager",
+  "integration_type": "service",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/hunter-nl/HA-Energy-Prices-Manager/issues",
   "requirements": [],
-  "iot_class": "local_polling"
+  "version": "1.0.0"
 }
