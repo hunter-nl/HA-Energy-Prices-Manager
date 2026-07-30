@@ -7,6 +7,10 @@ on:
         description: "Release version, without prefix v"
         required: true
         type: string
+      release_notes:
+        description: "Optional Markdown prepended verbatim to published notes; include your own heading"
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -86,6 +90,10 @@ jobs:
             - Updates version files
             - Updates CHANGELOG.md
             - Must pass CI and required review
+
+            <!-- custom-release-notes:start -->
+            ${{ inputs.release_notes || '_No additional release notes._' }}
+            <!-- custom-release-notes:end -->
           labels: release
           add-paths: |
             custom_components/${{ env.COMPONENT_NAME }}/manifest.json
