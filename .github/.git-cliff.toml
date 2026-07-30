@@ -1,4 +1,4 @@
-# .git-cliff configuration for Energy Prices Manager
+# .git-cliff configuration for HA-Energy-Prices-Manager
 # Generates changelogs from conventional commits
 
 [changelog]
@@ -6,6 +6,7 @@
 header = """
 ![Energy Prices Manager](brand/logo.svg)
 If you find this project useful, consider supporting its development:
+
 <a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;"></a>
 
 # Changelog
@@ -21,10 +22,13 @@ body = """
 
 ## [{{ version | default(value="Unreleased") }}]({{ self::remote_url() }}/releases/tag/{{ version | default(value="Unreleased") }})
 {% for commit_group, commit_list in commits | group_by(attribute="group") %}
-  ### {{ commit_group | striptags | trim | upper_first }}
-  {% for commit in commit_list | filter(attribute="remote.pr_number") | unique(attribute="remote.pr_number") %}
-    {{ self::print_commit(commit=commit) }}
-  {% endfor %}
+  {% set pull_requests = commit_list | filter(attribute="remote.pr_number") | unique(attribute="remote.pr_number") %}
+  {% if pull_requests | length > 0 %}
+    ### {{ commit_group | striptags | trim | upper_first }}
+    {% for commit in pull_requests %}
+      {{ self::print_commit(commit=commit) }}
+    {% endfor %}
+  {% endif %}
 {% endfor %}
 
 {% if github %}

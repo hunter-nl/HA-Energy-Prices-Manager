@@ -106,7 +106,7 @@ template: |
 
   ---
 
-  ## What's Changed in $RESOLVED_VERSION
+  ## What's Changed in v$RESOLVED_VERSION
 
   $CHANGES
 
