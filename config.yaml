@@ -1,0 +1,21 @@
+name: Energy Prices Manager
+version: 3.0.0
+slug: energy_prices_manager
+description: Manage energy tariff periods and Home Assistant price helpers
+url: https://github.com/hunter-nl/HA-Energy-Prices-Manager
+startup: services
+boot: auto
+panel_icon: mdi:lightning-bolt
+panel_title: Energy Prices
+panel_admin: true
+ingress: true
+ingress_port: 8099
+homeassistant_api: true
+arch:
+  - amd64
+  - aarch64
+  - armv7
+options:
+  log_level: info
+schema:
+  log_level: list(trace|debug|info|warning|error|fatal)

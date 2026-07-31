@@ -6,7 +6,7 @@ const infoCard = document.getElementById("current-info");
 const statusMessage = document.getElementById("status-message");
 
 const BASE_PATH = (() => {
-  const match = window.location.pathname.match(/(.*)\/energy_prices\//);
+  const match = window.location.pathname.match(/(.*)\/web/);
   return match ? match[1] : "";
 })();
 

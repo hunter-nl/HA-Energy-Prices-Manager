@@ -1,12 +1,13 @@
 [project]
-name = "energy-prices-manager"
-version = "1.0.2"
-description = "Home Assistant custom integration to manage energy prices of variable/fixed dutch energy contracts"
+name = "energy-prices-manager-app"
+version = "3.0.0"
+description = "Home Assistant App that manages energy tariff periods through Ingress"
 readme = "README.md"
 requires-python = ">=3.14.2"
 license = "AGPL-3.0-only"
 dependencies = [
-  "homeassistant>=2026.7.0",
+  "fastapi==0.128.0",
+  "websockets==16.0",
 ]
 
 [project.optional-dependencies]

@@ -8,9 +8,6 @@ on:
 permissions:
   contents: write
 
-env:
-  COMPONENT_NAME: ${{ vars.COMPONENT_NAME }}
-
 jobs:
   publish:
     if: >-
@@ -66,8 +63,7 @@ jobs:
 
       - name: Create release zip
         run: |
-          cd custom_components/${{ env.COMPONENT_NAME }}
-          zip -r ${{ github.workspace }}/energy-prices-manager.zip .
+          zip -r ${{ github.workspace }}/energy-prices-manager-app.zip . -x '.git/*' '.venv/*'
 
       - name: Extract custom release notes
         id: custom-release-notes
@@ -123,6 +119,6 @@ jobs:
           target_commitish: ${{ github.event.pull_request.merge_commit_sha }}
           name: ${{ steps.release-drafter.outputs.name }}
           body: ${{ steps.release-body.outputs.result }}
-          files: ${{ github.workspace }}/energy-prices-manager.zip
+          files: ${{ github.workspace }}/energy-prices-manager-app.zip
           prerelease: ${{ contains(steps.project-version.outputs.result, '-') }}
           make_latest: ${{ !contains(steps.project-version.outputs.result, '-') }}

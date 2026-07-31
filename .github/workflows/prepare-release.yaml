@@ -17,7 +17,6 @@ permissions:
   pull-requests: read
 
 env:
-  COMPONENT_NAME: ${{ vars.COMPONENT_NAME }}
   VERSION: ${{ inputs.version }}
 
 jobs:
@@ -51,10 +50,10 @@ jobs:
             exit 1
           fi
 
-      - name: Update manifest version
+      - name: Update app version
         uses: mikefarah/yq@v4
         with:
-          cmd: yq e -P -o=json -i '.version = strenv(VERSION)' "custom_components/${{ env.COMPONENT_NAME }}/manifest.json"
+          cmd: yq e -i '.version = strenv(VERSION)' config.yaml
 
       - name: Update package version
         uses: mikefarah/yq@v4
@@ -96,7 +95,7 @@ jobs:
             <!-- custom-release-notes:end -->
           labels: release
           add-paths: |
-            custom_components/${{ env.COMPONENT_NAME }}/manifest.json
+            config.yaml
             package.json
             pyproject.toml
             CHANGELOG.md
