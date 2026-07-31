@@ -51,15 +51,10 @@ jobs:
             exit 1
           fi
 
-      - name: Update manifest version
+      - name: Update App version
         uses: mikefarah/yq@v4
         with:
-          cmd: yq e -P -o=json -i '.version = strenv(VERSION)' "custom_components/${{ env.COMPONENT_NAME }}/manifest.json"
-
-      - name: Update package version
-        uses: mikefarah/yq@v4
-        with:
-          cmd: yq e -P -o=json -i '.version = strenv(VERSION)' "package.json"
+          cmd: yq e -i '.version = strenv(VERSION)' energy_prices_manager/config.yaml
 
       - name: Update pyproject version
         run: |
@@ -96,8 +91,7 @@ jobs:
             <!-- custom-release-notes:end -->
           labels: release
           add-paths: |
-            custom_components/${{ env.COMPONENT_NAME }}/manifest.json
-            package.json
+            energy_prices_manager/config.yaml
             pyproject.toml
             CHANGELOG.md
 
