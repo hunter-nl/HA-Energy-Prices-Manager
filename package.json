@@ -1,7 +1,7 @@
 {
   "name": "ha_energie_prices_manager",
   "displayName": "Home Assistant Energy Prices Manager",
-  "version": "1.0.1-beta.1",
+  "version": "1.0.1",
   "description": "Manages energy prices of variable/fixed dutch energy contracts for Home Assistant",
   "license": "AGPL-3.0-only",
   "author": "@hunter-nl"
