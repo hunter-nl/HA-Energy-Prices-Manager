@@ -67,7 +67,7 @@ jobs:
       - name: Create release zip
         run: |
           cd custom_components/${{ env.COMPONENT_NAME }}
-          zip -r ${{ github.workspace }}/matter-label-guard.zip .
+          zip -r ${{ github.workspace }}/energy-prices-manager.zip .
 
       - name: Extract custom release notes
         id: custom-release-notes
