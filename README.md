@@ -76,12 +76,12 @@ changes, Home Assistant starts, or a new day begins.
 HACS checks this custom repository for published releases and shows an available
 update in **Settings → Updates** (or as **Pending update** in HACS). Before
 upgrading, create a Home Assistant backup and read the release notes. Install
-the update, then restart Home Assistant.
+the update (by redownload), then restart Home Assistant.
 
 ### Manual
 
 1. Create a Home Assistant backup.
-2. Replace `/config/custom_components/energy-prices-manager` with the
+2. Replace `/config/custom_components/energy_prices_manager` with the
    `custom_components/energy_prices_manager` directory from the desired release.
 3. Restart Home Assistant.
 
