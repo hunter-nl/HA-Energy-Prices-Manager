@@ -9,6 +9,7 @@ const BASE_PATH = (() => {
   const match = window.location.pathname.match(/(.*)\/energy_prices\//);
   return match ? match[1] : "";
 })();
+const API_BASE = `${BASE_PATH}/api/energy_prices`;
 
 let periods = [];
 let originalPeriods = [];
@@ -225,8 +226,8 @@ function renderTable() {
 async function loadPeriods() {
   try {
     const [periodRes, currentRes] = await Promise.all([
-      fetch(`${BASE_PATH}/api/periods`),
-      fetch(`${BASE_PATH}/api/current`),
+      fetch(`${API_BASE}/periods`),
+      fetch(`${API_BASE}/current`),
     ]);
 
     if (!periodRes.ok) throw new Error("Unable to load saved periods.");
@@ -268,7 +269,7 @@ saveBtn.addEventListener("click", async () => {
 
   try {
     const sortedData = sortPeriodsByStart(data);
-    const res = await fetch(`${BASE_PATH}/api/periods`, {
+    const res = await fetch(`${API_BASE}/periods`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(sortedData),
@@ -285,7 +286,7 @@ saveBtn.addEventListener("click", async () => {
     originalPeriods = periods.map((p) => ({ ...p }));
     renderTable();
     setStatus("Periods saved successfully.", "success");
-    const currentData = await fetch(`${BASE_PATH}/api/current`).then((r) =>
+    const currentData = await fetch(`${API_BASE}/current`).then((r) =>
       r.ok ? r.json() : null,
     );
     renderCurrentInfo(currentData);
