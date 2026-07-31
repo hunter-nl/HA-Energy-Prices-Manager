@@ -20,9 +20,9 @@ The app creates and maintains these English `input_number` helpers:
 
 | Entity ID | Name | Unit |
 | --- | --- | --- |
-| `input_number.electricity_price_low_tariff` | Electricity price low tariff | EUR/kWh |
-| `input_number.electricity_price_high_tariff` | Electricity price high tariff | EUR/kWh |
-| `input_number.gas_price` | Gas price | EUR/m³ |
+| `input_number.energy_kwh_low_t1_price` | Energy kWh Low (T1) Price | EUR/kWh |
+| `input_number.energy_kwh_high_t2_price` | Energy kWh High (T2) Price | EUR/kWh |
+| `input_number.gas_m3_price` | Gas m3 Price | EUR/m³ |
 
 When periods are saved, and shortly after each midnight, the app writes the active period's values to those helpers. If no period is active, it leaves the current helper values unchanged.
 

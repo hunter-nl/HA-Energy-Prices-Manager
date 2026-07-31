@@ -42,22 +42,22 @@ class Period(BaseModel):
 
 HELPERS = (
     {
-        "entity_id": "input_number.electricity_price_low_tariff",
-        "name": "Electricity price low tariff",
+        "entity_id": "input_number.energy_kwh_low_t1_price",
+        "name": "Energy kWh Low (T1) Price",
         "unit_of_measurement": "EUR/kWh",
         "maximum": 1,
         "price_key": "t1",
     },
     {
-        "entity_id": "input_number.electricity_price_high_tariff",
-        "name": "Electricity price high tariff",
+        "entity_id": "input_number.energy_kwh_high_t2_price",
+        "name": "Energy kWh High (T2) Price",
         "unit_of_measurement": "EUR/kWh",
         "maximum": 1,
         "price_key": "t2",
     },
     {
-        "entity_id": "input_number.gas_price",
-        "name": "Gas price",
+        "entity_id": "input_number.gas_m3_price",
+        "name": "Gas m3 Price",
         "unit_of_measurement": "EUR/m³",
         "maximum": 5,
         "price_key": "gas",

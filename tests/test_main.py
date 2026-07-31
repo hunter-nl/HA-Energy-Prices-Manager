@@ -4,7 +4,16 @@ from datetime import date
 
 import pytest
 
-from app.main import Period, _current_period, _validate_periods
+from app.main import HELPERS, Period, _current_period, _validate_periods
+
+
+def test_helper_entity_ids_remain_compatible() -> None:
+    """Keep the established Energy Dashboard helper entity IDs."""
+    assert [helper["entity_id"] for helper in HELPERS] == [
+        "input_number.energy_kwh_low_t1_price",
+        "input_number.energy_kwh_high_t2_price",
+        "input_number.gas_m3_price",
+    ]
 
 
 def test_current_period_selects_active_range() -> None:
