@@ -39,5 +39,5 @@ def test_setup_registers_static_panel_and_sidebar_entry(monkeypatch: pytest.Monk
         sidebar_icon="mdi:lightning-bolt",
         frontend_url_path="energy-prices",
         require_admin=True,
-        config={"url": "/energy_prices/"},
+        config={"url": "/energy_prices/index.html"},
     )
