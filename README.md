@@ -9,8 +9,12 @@ Energy Prices Manager is a Home Assistant App (formerly add-on) for maintaining 
 ## Install
 
 1. In Home Assistant, open **Settings → Apps → App store**.
-2. Add `https://github.com/hunter-nl/HA-Energy-Prices-Manager` as an app repository.
+2. Open the app-store menu, choose **Repositories**, and add
+   `https://github.com/hunter-nl/HA-Energy-Prices-Manager`.
 3. Install **Energy Prices Manager** and open it from the sidebar.
+
+HACS does not install Supervisor Apps. It installs integrations to
+`/config/custom_components`, which is not an App repository location.
 
 The app creates and maintains these English `input_number` helpers:
 
