@@ -1,6 +1,6 @@
 [project]
 name = "energy-prices-manager"
-version = "1.0.1"
+version = "1.0.1-beta.1"
 description = "Home Assistant custom integration to manage energy prices of variable/fixed dutch energy contracts"
 readme = "README.md"
 requires-python = ">=3.14.2"

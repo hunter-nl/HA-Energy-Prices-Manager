@@ -4,6 +4,28 @@ If you find this project useful, consider supporting its development:
 <a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;"></a>
 
 # Changelog
+## [v1.0.1-beta.1](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v1.0.1-beta.1)
+
+
+
+### :question: Miscellaneous
+
+- [Feat: Add support for published release events and update documentation](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/10) ([#10](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/10))
+
+
+
+
+
+### :bug: Fixes
+
+- [Fix(changelog): exclude release pull requests](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/9) ([#9](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/9))
+
+
+
+
+
+
+
 ## [v1.0.1](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v1.0.1)
 
 
@@ -44,6 +66,9 @@ If you find this project useful, consider supporting its development:
 
 
 
+
+
+
 ### :bug: Fixes
 
 - [Update manifest and restructure translation configuration](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/3) ([#3](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/3))
@@ -64,6 +89,11 @@ If you find this project useful, consider supporting its development:
 
 
 ## ❤️ New Contributors
+
+
+* @releases-manager[bot] made their first contribution
+
+in [#5](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/5)
 
 
 * @hunter-nl made their first contribution
