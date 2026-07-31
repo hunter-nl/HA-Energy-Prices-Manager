@@ -43,7 +43,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
         www_path = Path(__file__).parent / "www"
         await hass.http.async_register_static_paths(
-            [StaticPathConfig("/energy_prices/", str(www_path), cache_headers=False)]
+            [StaticPathConfig("/energy_prices", str(www_path), cache_headers=False)]
         )
 
         async_register_built_in_panel(
