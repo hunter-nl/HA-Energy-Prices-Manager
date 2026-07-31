@@ -123,6 +123,6 @@ jobs:
           target_commitish: ${{ github.event.pull_request.merge_commit_sha }}
           name: ${{ steps.release-drafter.outputs.name }}
           body: ${{ steps.release-body.outputs.result }}
-          files: ${{ github.workspace }}/matter-label-guard.zip
+          files: ${{ github.workspace }}/energy-prices-manager.zip
           prerelease: ${{ contains(steps.project-version.outputs.result, '-') }}
           make_latest: ${{ !contains(steps.project-version.outputs.result, '-') }}
