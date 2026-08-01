@@ -22,6 +22,7 @@ jobs:
 
     runs-on: ubuntu-latest
     outputs:
+      cache-image-tag: ${{ steps.previous-app-version.outputs.version }}
       version: ${{ steps.app-version.outputs.result }}
 
     steps:
@@ -35,6 +36,21 @@ jobs:
         uses: mikefarah/yq@v4
         with:
           cmd: yq -r '.version' energy_prices_manager/config.yaml
+
+      - name: Read previous App version for the image cache
+        id: previous-app-version
+        env:
+          RELEASE_SHA: ${{ github.event.pull_request.merge_commit_sha }}
+        run: |
+          previous_version="$(
+            git show "$RELEASE_SHA^:energy_prices_manager/config.yaml" |
+              ruby -e 'require "yaml"; print YAML.load(STDIN).fetch("version")'
+          )"
+          if [[ ! "$previous_version" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?$ ]]; then
+            echo "Invalid previous App version: $previous_version" >&2
+            exit 1
+          fi
+          echo "version=$previous_version" >> "$GITHUB_OUTPUT"
 
       - name: Validate merged release commit
         env:
@@ -85,6 +101,7 @@ jobs:
     name: Build ${{ matrix.arch }} image
     runs-on: ${{ matrix.os }}
     permissions:
+      actions: write
       contents: read
       id-token: write
       packages: write
@@ -106,7 +123,9 @@ jobs:
           context: ./energy_prices_manager
           image: ${{ matrix.image }}
           image-tags: ${{ needs.release-context.outputs.version }}
-          cache-gha: false
+          cache-image-tag: ${{ needs.release-context.outputs.cache-image-tag }}
+          cache-gha: true
+          cache-gha-scope: ${{ env.IMAGE_NAME }}
           push: "true"
           version: ${{ needs.release-context.outputs.version }}
 
@@ -115,6 +134,7 @@ jobs:
     name: Publish multi-architecture manifest
     runs-on: ubuntu-latest
     permissions:
+      actions: write
       id-token: write
       packages: write
     steps:
