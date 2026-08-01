@@ -101,8 +101,7 @@ the same.
 
 The Dockerfile is the source of truth for local and CI builds. It carries the
 required Home Assistant image labels plus OCI title, description, source, and
-license metadata; the publishing workflow supplies the same Home Assistant
-metadata to the Builder action.
+license metadata.
 
 Before the first public release, the repository owner must set the newly
 created GHCR package `energy-prices-manager` to **Public** in GitHub package
