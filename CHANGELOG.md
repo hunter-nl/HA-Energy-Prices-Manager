@@ -4,11 +4,13 @@ If you find this project useful, consider supporting its development:
 <a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="180" height="50"></a>
 
 # Changelog
-## [v0.5.1](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v0.5.1)
+## [v0.5.2](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v0.5.2)
 
 
 
 ### :question: Miscellaneous
+
+- [Fix(release): disable actions build cache](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/41) ([#41](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/41))
 
 - [Fix(release): avoid failing actions cache export](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/39) ([#39](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/39))
 
