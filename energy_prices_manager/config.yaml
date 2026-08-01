@@ -1,5 +1,5 @@
 name: Energy Prices Manager
-version: 0.2.0
+version: 0.3.0
 slug: energy_prices_manager
 description: Manage energy tariff periods and keep Home Assistant price helpers current
 url: https://github.com/hunter-nl/HA-Energy-Prices-Manager

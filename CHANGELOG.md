@@ -4,11 +4,34 @@ If you find this project useful, consider supporting its development:
 <a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;"></a>
 
 # Changelog
+## [v0.3.0](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v0.3.0)
+
+
+
+### :question: Miscellaneous
+
+- [Fix(app): publish local changelog](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/32) ([#32](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/32))
+
+- [Fix(app): use icon for App Store logo](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/31) ([#31](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/31))
+
+- [Fix(release): cache architecture image builds](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/30) ([#30](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/30))
+
+
+
+
+
+
+
+
+
+
 ## [v0.2.0](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v0.2.0)
 
 
 
 ### :question: Miscellaneous
+
+- [Fix(app): render README images correctly](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/29) ([#29](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/29))
 
 - [Update GitHub Issues link in README and add support section](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/27) ([#27](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/27))
 
