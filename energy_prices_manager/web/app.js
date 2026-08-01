@@ -5,11 +5,7 @@ const resetBtn = document.getElementById("reset-btn");
 const infoCard = document.getElementById("current-info");
 const statusMessage = document.getElementById("status-message");
 
-const BASE_PATH = (() => {
-  const match = window.location.pathname.match(/(.*)\/energy_prices\//);
-  return match ? match[1] : "";
-})();
-const API_BASE = `${BASE_PATH}/api/energy_prices`;
+const API_BASE_PATH = "api";
 
 let periods = [];
 let originalPeriods = [];
@@ -226,8 +222,8 @@ function renderTable() {
 async function loadPeriods() {
   try {
     const [periodRes, currentRes] = await Promise.all([
-      fetch(`${API_BASE}/periods`),
-      fetch(`${API_BASE}/current`),
+      fetch(`${API_BASE_PATH}/periods`),
+      fetch(`${API_BASE_PATH}/current`),
     ]);
 
     if (!periodRes.ok) throw new Error("Unable to load saved periods.");
@@ -269,7 +265,7 @@ saveBtn.addEventListener("click", async () => {
 
   try {
     const sortedData = sortPeriodsByStart(data);
-    const res = await fetch(`${API_BASE}/periods`, {
+    const res = await fetch(`${API_BASE_PATH}/periods`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(sortedData),
@@ -286,7 +282,7 @@ saveBtn.addEventListener("click", async () => {
     originalPeriods = periods.map((p) => ({ ...p }));
     renderTable();
     setStatus("Periods saved successfully.", "success");
-    const currentData = await fetch(`${API_BASE}/current`).then((r) =>
+    const currentData = await fetch(`${API_BASE_PATH}/current`).then((r) =>
       r.ok ? r.json() : null,
     );
     renderCurrentInfo(currentData);

@@ -71,5 +71,5 @@ config/*
 htmlcov/
 .pytest_cache/
 
-# Docker add-on (legacy)
+# Home Assistant App images
 *.tar.gz
