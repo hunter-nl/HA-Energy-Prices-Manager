@@ -28,3 +28,4 @@ jobs:
           test -f energy_prices_manager/run.sh
           test -f energy_prices_manager/icon.png
           test -f energy_prices_manager/logo.png
+          test -f energy_prices_manager/CHANGELOG.md
