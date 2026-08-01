@@ -1,7 +1,12 @@
 # Energy Prices Manager App
 
-This folder is a self-contained Home Assistant App. Copy this folder alone to
-`/addons/local/energy_prices_manager` for local development, or install the
-repository through the Home Assistant App Store for released GHCR images.
+Manage electricity and gas tariff periods from Home Assistant. The app keeps
+the current-price helpers up to date automatically at startup, at midnight,
+and whenever you save a period.
 
-See the repository [README](../README.md) for installation and release details.
+Install the app, start it, then open **Energy Prices Manager** from the sidebar
+to add or update tariff periods. The app creates the electricity T1, electricity
+T2, and gas price helpers when it starts.
+
+For usage, installation, and troubleshooting, see the repository
+[documentation](../README.md).
