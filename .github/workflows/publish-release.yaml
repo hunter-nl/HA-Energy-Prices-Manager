@@ -10,7 +10,7 @@ permissions:
   packages: write
 
 env:
-  ARCHITECTURES: '["amd64", "aarch64", "armv7"]'
+  ARCHITECTURES: '["amd64", "aarch64"]'
   IMAGE_NAME: energy-prices-manager
   REGISTRY_PREFIX: ghcr.io/hunter-nl
 

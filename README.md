@@ -88,8 +88,9 @@ The release process is deliberately image-based:
 1. **Prepare release** updates the App config, Python metadata, and changelog
    in a reviewable release PR.
 2. Merging that PR triggers **Publish release**.
-3. The workflow builds and pushes a versioned image for `amd64`, `aarch64`, and
-   `armv7` to GHCR, then creates the GitHub release.
+3. The workflow builds and pushes a versioned image for every Home Assistant
+   App architecture (`amd64` and `aarch64`) to GHCR, then creates the GitHub
+   release.
 
 The App configuration references the generic multi-architecture image
 `ghcr.io/hunter-nl/energy-prices-manager:<version>`. The publishing workflow
