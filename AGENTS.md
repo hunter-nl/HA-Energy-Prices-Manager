@@ -2,33 +2,48 @@
 
 ## Project Overview
 
-This is the Energy Prices Manager integration for Home Assistant.
+Energy Prices Manager is a Home Assistant App for maintaining electricity and
+gas tariff periods. It is distributed through a Home Assistant App repository
+and GHCR multi-architecture images.
 
 ## Setup Commands
 
 - Install dependencies: `uv sync`
-- Run all checks (lint, format, type, test): `uv run ruff check && uv run ruff format --check && uv run ty check && uv run pytest`
+- Run all checks: `uv run ruff check && uv run ruff format --check && uv run ty check && uv run pytest`
 - Run tests: `uv run pytest`
 - Run linter: `uv run ruff check`
 - Run type checker: `uv run ty check`
 - Format code: `uv run ruff format`
 
-## MCP servers
+## App Structure
 
-- Use GitHub MCP tools for managing repositories, issues, and pull requests
-- Use Context7 MCP when you need library/API documentation, code generation, setup, or configuration steps
+- `energy_prices_manager/config.yaml`: Supervisor App metadata, supported
+  architectures, Ingress, and GHCR image name.
+- `energy_prices_manager/Dockerfile`: the single source of truth for App and
+  OCI image metadata, build arguments, and runtime dependencies.
+- `energy_prices_manager/app/main.py`: FastAPI API, period persistence, and
+  Home Assistant helper creation/synchronisation.
+- `energy_prices_manager/web/`: Ingress frontend assets.
+- `repository.yaml`: Home Assistant App repository metadata.
 
-## General rules
+## Release and Distribution
 
-- Always ask if you are unsure what to do or if the potential impact of a change is large
-- Always use Context7 MCP when you need library/API documentation, code generation, setup, or configuration
- steps without the user explicitly asking
-- Comments: Use sparingly, explain WHY not WHAT
-- Mirror patterns from existing integration modules under `custom_components/energy_prices_manager` and tests under `tests`.
-- Prioritize maintainability, testability, and performance while matching existing simplicity. Follow logging, typing, and retry patterns already used.
+- Keep GitHub **Releases** and **Packages** enabled. Releases provide draft and
+  final notes; Packages hosts the public GHCR App image.
+- The manually entered Prepare Release version is authoritative. It must match
+  `energy_prices_manager/config.yaml` and published image tags.
+- Publish Release builds `amd64` and `aarch64` images with the maintained Home
+  Assistant Builder actions, then publishes the generic multi-architecture
+  manifest `ghcr.io/hunter-nl/energy-prices-manager:<version>`.
+- Do not create zip release artifacts, manually create release tags, or add
+  `{arch}` to the public `image:` configuration.
 
-## Architecture & Module Boundaries
+## General Rules
 
-- `config_flow.py`: Defines interval and maintain the labels list.
-- `__init__.py`: Integration setup, device registration, migration logic, coordinator instantiation.
-- `http_api.py`: Handles API calls to the energy prices service, including authentication and data retrieval.
+- Use GitHub tooling for repository, issue, and pull-request work.
+- Use current official Home Assistant App documentation when changing App
+  configuration, Docker image publishing, or Supervisor communication.
+- Comments should be sparse and explain why, not what.
+- Preserve the Energy Dashboard helper IDs and English helper names.
+- Keep changes maintainable, testable, and focused. Add or update tests when
+  backend behaviour changes.

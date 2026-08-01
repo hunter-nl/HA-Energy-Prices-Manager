@@ -36,9 +36,8 @@ automation is needed.
 
 ## Install from this App repository
 
-This is a Home Assistant App repository, not a HACS repository. HACS installs
-custom integrations into `/config/custom_components`; it does not install
-Supervisor Apps.
+This is a Home Assistant App repository. Install it from the Home Assistant App
+Store using the repository URL below.
 
 1. In Home Assistant, open **Settings → Apps → App Store**.
 2. Open the menu, choose **Repositories**, then add
@@ -107,6 +106,18 @@ Before the first public release, the repository owner must set the newly
 created GHCR package `energy-prices-manager` to **Public** in GitHub package
 settings. Home Assistant installations must be able to pull the generic image
 without a GitHub login.
+
+### GitHub repository settings
+
+Keep both **Releases** and **Packages** enabled for this repository:
+
+- **Releases** are used by Release Drafter for draft notes and by the Publish
+  Release workflow for the final versioned release and Git tag.
+- **Packages** enables the public GHCR image that Home Assistant downloads.
+
+They are complementary. Do not delete a published release just to manage its
+container image; deleting a release does not remove its Git tag, while release
+notes rely on the release history for a useful comparison range.
 
 For local checks, run:
 
