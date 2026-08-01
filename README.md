@@ -36,9 +36,8 @@ automation is needed.
 
 ## Install from this App repository
 
-This is a Home Assistant App repository, not a HACS repository. HACS installs
-custom integrations into `/config/custom_components`; it does not install
-Supervisor Apps.
+This is a Home Assistant App repository. Install it from the Home Assistant App
+Store using the repository URL below.
 
 1. In Home Assistant, open **Settings → Apps → App Store**.
 2. Open the menu, choose **Repositories**, then add

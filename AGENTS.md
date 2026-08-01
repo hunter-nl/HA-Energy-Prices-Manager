@@ -4,7 +4,7 @@
 
 Energy Prices Manager is a Home Assistant App for maintaining electricity and
 gas tariff periods. It is distributed through a Home Assistant App repository
-and GHCR multi-architecture images; it is not a HACS custom integration.
+and GHCR multi-architecture images.
 
 ## Setup Commands
 
