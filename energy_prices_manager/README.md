@@ -29,7 +29,7 @@ For usage, installation, and troubleshooting, see the repository
 
 ## Support
 
-- [GitHub Issues](https://github.com/hunter-nl/HA-Matter-Label-Guard/issues)
+- [GitHub Issues](https://github.com/hunter-nl/HA-Energy-Prices-Manager/issues)
 - [Home Assistant Community](https://community.home-assistant.io/)
 
 ## Funding
