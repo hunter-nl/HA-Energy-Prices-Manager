@@ -128,3 +128,14 @@ uv run ruff format --check
 uv run ty check
 uv run pytest
 ```
+
+## Support
+
+- [GitHub Issues](https://github.com/hunter-nl/HA-Energy-Prices-Manager/issues)
+- [Home Assistant Community](https://community.home-assistant.io/)
+
+## Funding
+
+If you find this project useful, consider supporting its development:
+
+<a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;"></a>
