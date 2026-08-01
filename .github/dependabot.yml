@@ -1,4 +1,5 @@
-# Set update schedule for GitHub Actions
+# GitHub Actions includes the Home Assistant Builder composite actions used by
+# the multi-architecture publishing workflow.
 
 version: 2
 updates:
@@ -13,6 +14,17 @@ updates:
     groups:
       # Group all GitHub Actions updates into a single pull request
       github-actions:
+        patterns:
+          - "*"
+  - package-ecosystem: "docker"
+    directory: "/energy_prices_manager"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore(deps):"
+      include: "scope"
+    groups:
+      docker-images:
         patterns:
           - "*"
   - package-ecosystem: "uv"

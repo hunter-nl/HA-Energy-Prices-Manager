@@ -108,6 +108,18 @@ created GHCR package `energy-prices-manager` to **Public** in GitHub package
 settings. Home Assistant installations must be able to pull the generic image
 without a GitHub login.
 
+### GitHub repository settings
+
+Keep both **Releases** and **Packages** enabled for this repository:
+
+- **Releases** are used by Release Drafter for draft notes and by the Publish
+  Release workflow for the final versioned release and Git tag.
+- **Packages** enables the public GHCR image that Home Assistant downloads.
+
+They are complementary. Do not delete a published release just to manage its
+container image; deleting a release does not remove its Git tag, while release
+notes rely on the release history for a useful comparison range.
+
 For local checks, run:
 
 ```sh
