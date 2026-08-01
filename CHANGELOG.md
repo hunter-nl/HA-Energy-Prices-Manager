@@ -4,6 +4,28 @@ If you find this project useful, consider supporting its development:
 <a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;"></a>
 
 # Changelog
+## [v0.2.0](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v0.2.0)
+
+
+
+### :question: Miscellaneous
+
+- [Update GitHub Issues link in README and add support section](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/27) ([#27](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/27))
+
+- [Fix(app): improve App Store presentation](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/26) ([#26](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/26))
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## [v0.0.2-beta.1](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v0.0.2-beta.1)
 
 
@@ -79,14 +101,14 @@ If you find this project useful, consider supporting its development:
 ## ❤️ New Contributors
 
 
+* @releases-manager[bot] made their first contribution
+
+in [#25](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/25)
+
+
 * @hunter-nl made their first contribution
 
 in [#24](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/24)
-
-
-* @releases-manager[bot] made their first contribution
-
-in [#23](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/23)
 
 
 * @github-actions[bot] made their first contribution
