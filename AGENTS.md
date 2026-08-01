@@ -26,6 +26,18 @@ and GHCR multi-architecture images.
 - `energy_prices_manager/web/`: Ingress frontend assets.
 - `repository.yaml`: Home Assistant App repository metadata.
 
+## Branding Assets
+
+- `energy_prices_manager/logo.png` and `icon.png` are the fixed filenames Home
+  Assistant uses for the App Store. The root `brand/` directory is separate
+  repository branding and is not consumed by Home Assistant.
+- Do not change `brand/` assets when changing an App Store asset unless the
+  user explicitly requests it. Keep both normal-resolution and `@2x` PNG
+  exports in `brand/`.
+- When rendering a transparent App Store logo, render directly to an RGBA PNG;
+  do not use a thumbnail renderer. Verify transparent corners and check that
+  semi-transparent edge pixels do not contain white matte artefacts.
+
 ## Release and Distribution
 
 - Keep GitHub **Releases** and **Packages** enabled. Releases provide draft and
