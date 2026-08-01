@@ -4,7 +4,7 @@ If you find this project useful, consider supporting its development:
 <a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;"></a>
 
 # Changelog
-## [v0.0.1](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v0.0.1)
+## [v0.0.2-beta.1](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v0.0.2-beta.1)
 
 
 
@@ -20,6 +20,8 @@ If you find this project useful, consider supporting its development:
 
 
 ### :question: Miscellaneous
+
+- [Fix(release): disable shared build cache](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/24) ([#24](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/24))
 
 - [Fix application name in `repository.yaml`](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/22) ([#22](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/22))
 
@@ -71,12 +73,20 @@ If you find this project useful, consider supporting its development:
 
 
 
+
+
+
 ## ❤️ New Contributors
 
 
 * @hunter-nl made their first contribution
 
-in [#22](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/22)
+in [#24](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/24)
+
+
+* @releases-manager[bot] made their first contribution
+
+in [#23](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/23)
 
 
 * @github-actions[bot] made their first contribution
@@ -85,11 +95,6 @@ in [#21](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/21)
 
 
 * @dependabot[bot] made their first contribution
-
-
-* @releases-manager[bot] made their first contribution
-
-in [#15](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/15)
 
 
 * @ made their first contribution
