@@ -4,7 +4,18 @@ If you find this project useful, consider supporting its development:
 <a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="180" height="50"></a>
 
 # Changelog
-## [v0.5.2](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v0.5.2)
+## [v1.0.0](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v1.0.0)
+
+
+
+### :sparkles: Features
+
+- [Enhance release workflow and documentation](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/4) ([#4](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/4))
+
+
+
+
+
 
 
 
@@ -26,55 +37,11 @@ If you find this project useful, consider supporting its development:
 
 - [Fix(release): cache architecture image builds](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/30) ([#30](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/30))
 
-
-
-
-
-
-
-
-
-
-## [v0.2.0](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v0.2.0)
-
-
-
-### :question: Miscellaneous
-
 - [Fix(app): render README images correctly](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/29) ([#29](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/29))
 
 - [Update GitHub Issues link in README and add support section](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/27) ([#27](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/27))
 
 - [Fix(app): improve App Store presentation](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/26) ([#26](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/26))
-
-
-
-
-
-
-
-
-
-
-
-
-
-## [v0.0.2-beta.1](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v0.0.2-beta.1)
-
-
-
-### :sparkles: Features
-
-- [Enhance release workflow and documentation](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/4) ([#4](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/4))
-
-
-
-
-
-
-
-
-### :question: Miscellaneous
 
 - [Fix(release): disable shared build cache](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/24) ([#24](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/24))
 
@@ -136,12 +103,12 @@ If you find this project useful, consider supporting its development:
 
 * @releases-manager[bot] made their first contribution
 
-in [#25](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/25)
+in [#44](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/44)
 
 
 * @hunter-nl made their first contribution
 
-in [#24](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/24)
+in [#41](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/41)
 
 
 * @github-actions[bot] made their first contribution
