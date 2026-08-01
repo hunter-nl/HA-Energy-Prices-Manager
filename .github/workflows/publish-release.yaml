@@ -106,11 +106,6 @@ jobs:
           context: ./energy_prices_manager
           image: ${{ matrix.image }}
           image-tags: ${{ needs.release-context.outputs.version }}
-          labels: |
-            io.hass.type=app
-            io.hass.name=Energy Prices Manager
-            io.hass.description=Manage energy tariff periods and Home Assistant price helpers
-            io.hass.url=https://github.com/hunter-nl/HA-Energy-Prices-Manager
           push: "true"
           version: ${{ needs.release-context.outputs.version }}
 
