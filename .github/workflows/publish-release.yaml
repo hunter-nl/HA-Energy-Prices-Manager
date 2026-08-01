@@ -125,7 +125,8 @@ jobs:
           image-tags: ${{ needs.release-context.outputs.version }}
           cache-image-tag: ${{ needs.release-context.outputs.cache-image-tag }}
           cache-gha: true
-          cache-gha-scope: ${{ env.IMAGE_NAME }}
+          # Each matrix job exports a cache concurrently; scopes must not overlap.
+          cache-gha-scope: ${{ matrix.arch }}-${{ env.IMAGE_NAME }}
           push: "true"
           version: ${{ needs.release-context.outputs.version }}
 
