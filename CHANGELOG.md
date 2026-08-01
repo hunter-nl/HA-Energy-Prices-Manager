@@ -4,64 +4,7 @@ If you find this project useful, consider supporting its development:
 <a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;"></a>
 
 # Changelog
-## [v1.0.2](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v1.0.2)
-
-
-
-### :bug: Fixes
-
-- [Update release zip file name to `energy-prices-manager.zip`](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/14) ([#14](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/14))
-
-
-
-
-
-
-
-## [v1.0.1](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v1.0.1)
-
-
-
-### :bug: Fixes
-
-- [Fix: Update release zip file name to `energy-prices-manager.zip`](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/12) ([#12](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/12))
-
-
-
-
-
-
-
-## [v1.0.1-beta.1](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v1.0.1-beta.1)
-
-
-
-
-
-
-### :question: Miscellaneous
-
-- [Feat: Add support for published release events and update documentation](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/10) ([#10](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/10))
-
-- [Chore(brand): add raster image assets](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/6) ([#6](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/6))
-
-
-
-
-
-### :bug: Fixes
-
-- [Fix(changelog): exclude release pull requests](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/9) ([#9](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/9))
-
-- [Fix: Update logo format and release process](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/7) ([#7](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/7))
-
-
-
-
-
-
-
-## [v1.0.0](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v1.0.0)
+## [v0.0.1](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v0.0.1)
 
 
 
@@ -76,10 +19,35 @@ If you find this project useful, consider supporting its development:
 
 
 
+### :question: Miscellaneous
+
+- [Fix application name in `repository.yaml`](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/22) ([#22](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/22))
+
+- [Docs: align App distribution guidance](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/20) ([#20](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/20))
+
+- [Fix(ci): keep image labels in Dockerfile](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/19) ([#19](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/19))
+
+- [Feat!: migrate to Home Assistant App repository](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/18) ([#18](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/18))
+
+- [Fix(frontend): register valid static panel path](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/16) ([#16](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/16))
+
+- [Feat: Add support for published release events and update documentation](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/10) ([#10](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/10))
+
+- [Chore(brand): add raster image assets](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/6) ([#6](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/6))
+
+
 
 
 
 ### :bug: Fixes
+
+- [Update release zip file name to `energy-prices-manager.zip`](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/14) ([#14](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/14))
+
+- [Fix: Update release zip file name to `energy-prices-manager.zip`](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/12) ([#12](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/12))
+
+- [Fix(changelog): exclude release pull requests](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/9) ([#9](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/9))
+
+- [Fix: Update logo format and release process](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/7) ([#7](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/7))
 
 - [Update manifest and restructure translation configuration](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/3) ([#3](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/3))
 
@@ -88,6 +56,8 @@ If you find this project useful, consider supporting its development:
 
 
 ### :arrow_up: Dependencies
+
+- [Chore(deps):(deps): bump the dependencies group with 2 updates](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/21) ([#21](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/21))
 
 - [Chore(deps):(deps): bump the github-actions group with 2 updates](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/1) ([#1](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/1))
 
@@ -98,25 +68,28 @@ If you find this project useful, consider supporting its development:
 
 
 
+
+
+
 ## ❤️ New Contributors
-
-
-* @releases-manager[bot] made their first contribution
-
-in [#5](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/5)
 
 
 * @hunter-nl made their first contribution
 
-in [#4](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/4)
+in [#22](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/22)
 
 
 * @github-actions[bot] made their first contribution
 
-in [#1](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/1)
+in [#21](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/21)
 
 
 * @dependabot[bot] made their first contribution
+
+
+* @releases-manager[bot] made their first contribution
+
+in [#15](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/15)
 
 
 * @ made their first contribution
