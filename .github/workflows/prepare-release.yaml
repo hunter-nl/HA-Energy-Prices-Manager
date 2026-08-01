@@ -70,9 +70,7 @@ jobs:
           GITHUB_REPO: ${{ github.repository }}
 
       - name: Update App changelog
-        run: |
-          cp CHANGELOG.md energy_prices_manager/CHANGELOG.md
-          sed -i 's|src="brand/logo.svg"|src="https://raw.githubusercontent.com/hunter-nl/HA-Energy-Prices-Manager/main/brand/logo.png"|' energy_prices_manager/CHANGELOG.md
+        run: cp CHANGELOG.md energy_prices_manager/CHANGELOG.md
 
       - name: Create release pull request
         id: create-pull-request
