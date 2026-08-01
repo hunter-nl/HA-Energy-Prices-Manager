@@ -1,14 +1,19 @@
-ARG BUILD_FROM=python:3.14-slim
-FROM ${BUILD_FROM}
+FROM python:3.14-slim
 
-ARG BUILD_ARCH
-ARG BUILD_VERSION
+ARG BUILD_ARCH=amd64
+ARG BUILD_VERSION=dev
 
 LABEL \
   io.hass.type="app" \
   io.hass.version="${BUILD_VERSION}" \
   io.hass.arch="${BUILD_ARCH}" \
-  org.opencontainers.image.source="https://github.com/hunter-nl/HA-Energy-Prices-Manager"
+  io.hass.name="Energy Prices Manager" \
+  io.hass.description="Manage energy tariff periods and Home Assistant price helpers" \
+  io.hass.url="https://github.com/hunter-nl/HA-Energy-Prices-Manager" \
+  org.opencontainers.image.title="Energy Prices Manager" \
+  org.opencontainers.image.description="Manage energy tariff periods and Home Assistant price helpers" \
+  org.opencontainers.image.source="https://github.com/hunter-nl/HA-Energy-Prices-Manager" \
+  org.opencontainers.image.licenses="AGPL-3.0-only"
 
 WORKDIR /app
 

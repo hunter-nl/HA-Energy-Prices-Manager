@@ -99,6 +99,11 @@ lets Home Assistant select the correct architecture automatically. The version
 in `energy_prices_manager/config.yaml` and every published image tag are always
 the same.
 
+The Dockerfile is the source of truth for local and CI builds. It carries the
+required Home Assistant image labels plus OCI title, description, source, and
+license metadata; the publishing workflow supplies the same Home Assistant
+metadata to the Builder action.
+
 Before the first public release, the repository owner must set the newly
 created GHCR package `energy-prices-manager` to **Public** in GitHub package
 settings. Home Assistant installations must be able to pull the generic image
