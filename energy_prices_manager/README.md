@@ -1,6 +1,6 @@
 # Energy Prices Manager
 
-<img src="energy_prices_manager/logo.png" alt="Energy Prices Manager" width="480">
+<img src="https://github.com/hunter-nl/HA-Energy-Prices-Manager/blob/main/brand/logo.png" alt="Energy Prices Manager" width="480">
 
 [![Release][release-badge]][release-url]
 [![CI][ci-badge]][ci-url]
