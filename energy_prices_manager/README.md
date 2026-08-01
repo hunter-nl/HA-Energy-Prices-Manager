@@ -36,4 +36,4 @@ For usage, installation, and troubleshooting, see the repository
 
 If you find this project useful, consider supporting its development:
 
-☕ [Buy me a coffee](https://www.buymeacoffee.com/hunter.nl)
+<a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 36px !important;width: 130px !important;"></a>
