@@ -35,9 +35,6 @@ and GHCR multi-architecture images.
 - Publish Release builds `amd64` and `aarch64` images with the maintained Home
   Assistant Builder actions, then publishes the generic multi-architecture
   manifest `ghcr.io/hunter-nl/energy-prices-manager:<version>`.
-- If image publishing fails before a tag exists, use Publish Release's manual
-  dispatch after merging the workflow fix; it requires the version and merged
-  release commit SHA so it cannot publish an arbitrary revision.
 - Do not create zip release artifacts, manually create release tags, or add
   `{arch}` to the public `image:` configuration.
 

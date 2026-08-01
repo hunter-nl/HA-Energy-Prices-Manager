@@ -91,11 +91,6 @@ The release process is deliberately image-based:
    App architecture (`amd64` and `aarch64`) to GHCR, then creates the GitHub
    release.
 
-If an image publish fails before the tag is created, fix and merge the workflow
-first, then use **Publish release → Run workflow** on `main`. Supply the same
-version, the merged release commit SHA, and any custom release notes. This
-rebuilds the intended release commit without creating a second release PR.
-
 The App configuration references the generic multi-architecture image
 `ghcr.io/hunter-nl/energy-prices-manager:<version>`. The publishing workflow
 builds the per-architecture images behind it, then publishes one manifest that
