@@ -7,7 +7,7 @@
 [![License][license-badge]][license-url]
 [![Home Assistant][ha-badge]][ha-url]
 
-[release-badge]: https://img.shields.io/github/v/release/hunter-nl/HA-Energy-Prices-Manager?include_prereleases&sort=semver&display_name=release&label=Release
+[release-badge]: https://img.shields.io/github/v/release/hunter-nl/HA-Energy-Prices-Manager?include_prereleases&sort=semver&display_name=release&label=Release&color=blue
 [release-url]: https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases
 [ci-badge]: https://img.shields.io/github/actions/workflow/status/hunter-nl/HA-Energy-Prices-Manager/ci.yaml?label=CI
 [ci-url]: https://github.com/hunter-nl/HA-Energy-Prices-Manager/actions/workflows/ci.yaml
