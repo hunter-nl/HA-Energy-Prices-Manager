@@ -85,6 +85,7 @@ jobs:
     name: Build ${{ matrix.arch }} image
     runs-on: ${{ matrix.os }}
     permissions:
+      actions: write
       contents: read
       id-token: write
       packages: write
@@ -105,8 +106,11 @@ jobs:
           container-registry-password: ${{ secrets.GITHUB_TOKEN }}
           context: ./energy_prices_manager
           image: ${{ matrix.image }}
-          image-tags: ${{ needs.release-context.outputs.version }}
-          cache-gha: false
+          image-tags: |
+            ${{ needs.release-context.outputs.version }}
+            latest
+          cache-gha: true
+          cache-gha-scope: ${{ env.IMAGE_NAME }}
           push: "true"
           version: ${{ needs.release-context.outputs.version }}
 
@@ -115,6 +119,7 @@ jobs:
     name: Publish multi-architecture manifest
     runs-on: ubuntu-latest
     permissions:
+      actions: write
       id-token: write
       packages: write
     steps:
@@ -124,7 +129,9 @@ jobs:
           architectures: ${{ env.ARCHITECTURES }}
           container-registry-password: ${{ secrets.GITHUB_TOKEN }}
           image-name: ${{ env.IMAGE_NAME }}
-          image-tags: ${{ needs.release-context.outputs.version }}
+          image-tags: |
+            ${{ needs.release-context.outputs.version }}
+            latest
           registry-prefix: ${{ env.REGISTRY_PREFIX }}
 
   publish:
