@@ -69,6 +69,9 @@ jobs:
           OUTPUT: CHANGELOG.md
           GITHUB_REPO: ${{ github.repository }}
 
+      - name: Update App changelog
+        run: cp CHANGELOG.md energy_prices_manager/CHANGELOG.md
+
       - name: Create release pull request
         id: create-pull-request
         uses: peter-evans/create-pull-request@v8
@@ -84,6 +87,7 @@ jobs:
 
             - Updates version files
             - Updates CHANGELOG.md
+            - Updates energy_prices_manager/CHANGELOG.md
             - Must pass CI and required review
 
             <!-- custom-release-notes:start -->
@@ -94,6 +98,7 @@ jobs:
             energy_prices_manager/config.yaml
             pyproject.toml
             CHANGELOG.md
+            energy_prices_manager/CHANGELOG.md
 
       - name: Enable release pull request auto-merge
         if: steps.create-pull-request.outputs.pull-request-number
