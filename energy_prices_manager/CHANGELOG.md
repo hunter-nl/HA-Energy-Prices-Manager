@@ -4,11 +4,15 @@ If you find this project useful, consider supporting its development:
 <a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="180" height="50"></a>
 
 # Changelog
-## [v0.4.0](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v0.4.0)
+## [v0.5.0](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v0.5.0)
 
 
 
 ### :question: Miscellaneous
+
+- [Fix(release): isolate architecture build caches](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/37) ([#37](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/37))
+
+- [Fix(docs): use supported badge dimensions](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/36) ([#36](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/36))
 
 - [Fix(changelog): use shared logo reference](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/34) ([#34](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/34))
 
