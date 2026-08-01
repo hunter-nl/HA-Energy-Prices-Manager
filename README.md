@@ -91,16 +91,17 @@ The release process is deliberately image-based:
 3. The workflow builds and pushes a versioned image for `amd64`, `aarch64`, and
    `armv7` to GHCR, then creates the GitHub release.
 
-The App configuration references images in the form
-`ghcr.io/hunter-nl/{arch}-energy-prices-manager:<version>`. The version in
-`energy_prices_manager/config.yaml` and every published image tag are always
+The App configuration references the generic multi-architecture image
+`ghcr.io/hunter-nl/energy-prices-manager:<version>`. The publishing workflow
+builds the per-architecture images behind it, then publishes one manifest that
+lets Home Assistant select the correct architecture automatically. The version
+in `energy_prices_manager/config.yaml` and every published image tag are always
 the same.
 
-Before the first public release, the repository owner must set each newly
-created GHCR package (`amd64-energy-prices-manager`,
-`aarch64-energy-prices-manager`, and `armv7-energy-prices-manager`) to
-**Public** in GitHub package settings. Home Assistant installations must be
-able to pull these images without a GitHub login.
+Before the first public release, the repository owner must set the newly
+created GHCR package `energy-prices-manager` to **Public** in GitHub package
+settings. Home Assistant installations must be able to pull the generic image
+without a GitHub login.
 
 For local checks, run:
 

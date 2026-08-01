@@ -9,6 +9,11 @@ permissions:
   contents: write
   packages: write
 
+env:
+  ARCHITECTURES: '["amd64", "aarch64", "armv7"]'
+  IMAGE_NAME: energy-prices-manager
+  REGISTRY_PREFIX: ghcr.io/hunter-nl
+
 jobs:
   release-context:
     if: >-
@@ -62,56 +67,72 @@ jobs:
 
   build-images:
     needs: release-context
+    name: Initialize image builds
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - name: Prepare multi-architecture build matrix
+        id: matrix
+        uses: home-assistant/builder/actions/prepare-multi-arch-matrix@2026.06.0
+        with:
+          architectures: ${{ env.ARCHITECTURES }}
+          image-name: ${{ env.IMAGE_NAME }}
+          registry-prefix: ${{ env.REGISTRY_PREFIX }}
+
+  build-image:
+    needs: [release-context, build-images]
+    name: Build ${{ matrix.arch }} image
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
+      id-token: write
+      packages: write
     strategy:
       fail-fast: false
-      matrix:
-        include:
-          - arch: amd64
-            platform: linux/amd64
-          - arch: aarch64
-            platform: linux/arm64
-          - arch: armv7
-            platform: linux/arm/v7
+      matrix: ${{ fromJSON(needs.build-images.outputs.matrix) }}
 
     steps:
       - uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.merge_commit_sha }}
-
-      - name: Set image name
-        id: image
-        env:
-          ARCH: ${{ matrix.arch }}
-        run: echo "name=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/${ARCH}-energy-prices-manager" >> "$GITHUB_OUTPUT"
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
 
       - name: Build and publish ${{ matrix.arch }} image
-        uses: docker/build-push-action@v7
+        uses: home-assistant/builder/actions/build-image@2026.06.0
         with:
-          context: energy_prices_manager
-          file: energy_prices_manager/Dockerfile
-          platforms: ${{ matrix.platform }}
-          push: true
-          build-args: |
-            BUILD_ARCH=${{ matrix.arch }}
-            BUILD_VERSION=${{ needs.release-context.outputs.version }}
-          tags: ${{ steps.image.outputs.name }}:${{ needs.release-context.outputs.version }}
+          arch: ${{ matrix.arch }}
+          container-registry-password: ${{ secrets.GITHUB_TOKEN }}
+          context: ./energy_prices_manager
+          image: ${{ matrix.image }}
+          image-tags: ${{ needs.release-context.outputs.version }}
+          labels: |
+            io.hass.type=app
+            io.hass.name=Energy Prices Manager
+            io.hass.description=Manage energy tariff periods and Home Assistant price helpers
+            io.hass.url=https://github.com/hunter-nl/HA-Energy-Prices-Manager
+          push: "true"
+          version: ${{ needs.release-context.outputs.version }}
+
+  publish-manifest:
+    needs: [release-context, build-images, build-image]
+    name: Publish multi-architecture manifest
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      packages: write
+    steps:
+      - name: Publish generic image manifest
+        uses: home-assistant/builder/actions/publish-multi-arch-manifest@2026.06.0
+        with:
+          architectures: ${{ env.ARCHITECTURES }}
+          container-registry-password: ${{ secrets.GITHUB_TOKEN }}
+          image-name: ${{ env.IMAGE_NAME }}
+          image-tags: ${{ needs.release-context.outputs.version }}
+          registry-prefix: ${{ env.REGISTRY_PREFIX }}
 
   publish:
-    needs: [release-context, build-images]
+    needs: [release-context, publish-manifest]
     runs-on: ubuntu-latest
 
     # Configure required reviewers for this environment in repository settings.

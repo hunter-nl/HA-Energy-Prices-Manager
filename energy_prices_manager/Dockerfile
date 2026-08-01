@@ -5,7 +5,7 @@ ARG BUILD_ARCH
 ARG BUILD_VERSION
 
 LABEL \
-  io.hass.type="addon" \
+  io.hass.type="app" \
   io.hass.version="${BUILD_VERSION}" \
   io.hass.arch="${BUILD_ARCH}" \
   org.opencontainers.image.source="https://github.com/hunter-nl/HA-Energy-Prices-Manager"
