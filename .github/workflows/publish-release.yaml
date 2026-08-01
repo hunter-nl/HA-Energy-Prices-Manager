@@ -106,6 +106,7 @@ jobs:
           context: ./energy_prices_manager
           image: ${{ matrix.image }}
           image-tags: ${{ needs.release-context.outputs.version }}
+          cache-gha: false
           push: "true"
           version: ${{ needs.release-context.outputs.version }}
 
