@@ -1,7 +1,7 @@
 <img src="https://raw.githubusercontent.com/hunter-nl/HA-Energy-Prices-Manager/main/brand/logo.svg" alt="Energy Prices Manager" style="max-width: 1000px;">
 If you find this project useful, consider supporting its development:
 
-<a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;"></a>
+<a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="180" height="50"></a>
 
 # Changelog
 ## [v0.4.0](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v0.4.0)
@@ -151,4 +151,4 @@ in [#21](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/21)
 
 If you find this project useful, consider supporting its development:
 
-<a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;"></a>
+<a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="180" height="50"></a>
