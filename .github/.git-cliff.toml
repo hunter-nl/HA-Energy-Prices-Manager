@@ -115,7 +115,7 @@ commit_parsers = [
   { message = "^ci", group = "<!-- 10 --> :wrench: Maintenance" },
   { message = "^build", group = "<!-- 10 --> :wrench: Maintenance" },
   { message = ".* deprecated", body = ".*deprecated", group = "<!-- 11 --> :warning: Deprecations" },
-  { message = ".*", group = "<!-- 12 --> :question: Miscellaneous" }
+  { message = ".*", group = "<!-- 12 --> ❓ Miscellaneous" }
 ]
 link_parsers = [
   { pattern = "(?i)(close[sd]?|fix(?:e[sd])?|resolve[sd]?)\\s+#(\\d+)", text = "$1: #$2", href = "https://github.com/hunter-nl/HA-Energy-Prices-Manager/issues/$2" }
