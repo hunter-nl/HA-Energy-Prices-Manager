@@ -4,6 +4,20 @@ If you find this project useful, consider supporting its development:
 <a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="180" height="50"></a>
 
 # Changelog
+## [v1.1.0](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v1.1.0)
+
+
+
+### ✨ Features
+
+- [Feat: support signed electricity return prices](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/59) ([#59](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/59))
+
+
+
+
+
+
+
 ## [v1.0.7](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v1.0.7)
 
 
