@@ -36,14 +36,24 @@ function validatePeriod(period, index) {
   if (period.start && period.end && period.start > period.end) {
     errors.push(`Row ${index + 1}: start date must be on or before end date.`);
   }
-  if (!Number.isFinite(period.t1) || period.t1 < 0) {
+  if (!Number.isFinite(period.t1)) {
     errors.push(
-      `Row ${index + 1}: low electricity price must be a non-negative number.`,
+      `Row ${index + 1}: low electricity price must be a number.`,
     );
   }
-  if (!Number.isFinite(period.t2) || period.t2 < 0) {
+  if (!Number.isFinite(period.t2)) {
     errors.push(
-      `Row ${index + 1}: high electricity price must be a non-negative number.`,
+      `Row ${index + 1}: high electricity price must be a number.`,
+    );
+  }
+  if (!Number.isFinite(period.return_t1)) {
+    errors.push(
+      `Row ${index + 1}: returned low electricity price must be a number.`,
+    );
+  }
+  if (!Number.isFinite(period.return_t2)) {
+    errors.push(
+      `Row ${index + 1}: returned high electricity price must be a number.`,
     );
   }
   if (!Number.isFinite(period.gas) || period.gas < 0) {
@@ -80,7 +90,7 @@ function validateAllPeriods() {
 
 function getTableData() {
   return Array.from(tableBody.rows).map((row) => {
-    const [start, end, t1, t2, gas] = Array.from(
+    const [start, end, t1, t2, return_t1, return_t2, gas] = Array.from(
       row.querySelectorAll("input"),
     ).map((input) => input.value);
     return {
@@ -88,6 +98,8 @@ function getTableData() {
       end,
       t1: parseFloat(t1),
       t2: parseFloat(t2),
+      return_t1: parseFloat(return_t1),
+      return_t2: parseFloat(return_t2),
       gas: parseFloat(gas),
     };
   });
@@ -104,6 +116,8 @@ function dataChanged() {
       a.end !== b.end ||
       a.t1 !== b.t1 ||
       a.t2 !== b.t2 ||
+      a.return_t1 !== b.return_t1 ||
+      a.return_t2 !== b.return_t2 ||
       a.gas !== b.gas
     ) {
       return true;
@@ -129,6 +143,8 @@ function renderCurrentInfo(active) {
     ["Active period", `${active.start} → ${active.end}`],
     ["Low electricity", `€${formatCurrency(active.t1)}`],
     ["High electricity", `€${formatCurrency(active.t2)}`],
+    ["Returned low electricity", `€${formatCurrency(active.return_t1)}`],
+    ["Returned high electricity", `€${formatCurrency(active.return_t2)}`],
     ["Gas", `€${formatCurrency(active.gas)}`],
   ];
   rows.forEach(([label, value]) => {
@@ -141,16 +157,29 @@ function renderCurrentInfo(active) {
   });
 }
 
-function createInput(type, value, label) {
+function createInput(type, value, label, minimum = "-1") {
   const input = document.createElement("input");
   input.type = type;
   input.value = value ?? "";
   input.setAttribute("aria-label", label);
   if (type === "number") {
     input.step = "0.00001";
-    input.min = "0";
+    input.min = minimum;
   }
   return input;
+}
+
+function handleTableTab(event) {
+  if (event.key !== "Tab") return;
+
+  const inputs = Array.from(tableBody.querySelectorAll("input"));
+  const currentIndex = inputs.indexOf(event.currentTarget);
+  const nextIndex = currentIndex + (event.shiftKey ? -1 : 1);
+
+  if (nextIndex >= 0 && nextIndex < inputs.length) {
+    event.preventDefault();
+    inputs[nextIndex].focus();
+  }
 }
 
 function renderTable() {
@@ -170,7 +199,9 @@ function renderTable() {
       createInput("date", period.end, "End date"),
       createInput("number", period.t1, "Low electricity price"),
       createInput("number", period.t2, "High electricity price"),
-      createInput("number", period.gas, "Gas price"),
+      createInput("number", period.return_t1, "Returned low electricity price"),
+      createInput("number", period.return_t2, "Returned high electricity price"),
+      createInput("number", period.gas, "Gas price", "0"),
     ];
     inputs.forEach((input) => {
       const cell = document.createElement("td");
@@ -187,8 +218,9 @@ function renderTable() {
     deleteCell.appendChild(deleteButton);
     tr.appendChild(deleteCell);
 
-    const keys = ["start", "end", "t1", "t2", "gas"];
+    const keys = ["start", "end", "t1", "t2", "return_t1", "return_t2", "gas"];
     inputs.forEach((input, i) => {
+      input.addEventListener("keydown", handleTableTab);
       input.addEventListener("input", () => {
         periods[index][keys[i]] =
           input.type === "number" ? parseFloat(input.value) : input.value;
@@ -249,7 +281,15 @@ function sortPeriodsByStart(data) {
 }
 
 addBtn.addEventListener("click", () => {
-  periods.push({ start: "", end: "", t1: 0.0, t2: 0.0, gas: 0.0 });
+  periods.push({
+    start: "",
+    end: "",
+    t1: 0.0,
+    t2: 0.0,
+    return_t1: 0.0,
+    return_t2: 0.0,
+    gas: 0.0,
+  });
   renderTable();
 });
 
