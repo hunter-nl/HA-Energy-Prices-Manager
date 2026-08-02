@@ -32,8 +32,9 @@ class Helper(TypedDict):
     entity_id: str
     name: str
     unit_of_measurement: str
+    minimum: int
     maximum: int
-    price_key: Literal["t1", "t2", "gas"]
+    price_key: Literal["t1", "t2", "return_t1", "return_t2", "gas"]
 
 
 class Period(BaseModel):
@@ -41,8 +42,10 @@ class Period(BaseModel):
 
     start: date
     end: date
-    t1: float = Field(ge=0)
-    t2: float = Field(ge=0)
+    t1: float
+    t2: float
+    return_t1: float = 0
+    return_t2: float = 0
     gas: float = Field(ge=0)
 
 
@@ -51,6 +54,7 @@ HELPERS: tuple[Helper, ...] = (
         "entity_id": "input_number.energy_kwh_low_t1_price",
         "name": "Energy kWh Low (T1) Price",
         "unit_of_measurement": "EUR/kWh",
+        "minimum": -1,
         "maximum": 1,
         "price_key": "t1",
     },
@@ -58,13 +62,31 @@ HELPERS: tuple[Helper, ...] = (
         "entity_id": "input_number.energy_kwh_high_t2_price",
         "name": "Energy kWh High (T2) Price",
         "unit_of_measurement": "EUR/kWh",
+        "minimum": -1,
         "maximum": 1,
         "price_key": "t2",
+    },
+    {
+        "entity_id": "input_number.energy_return_kwh_low_t1_price",
+        "name": "Energy Return kWh Low (T1) Price",
+        "unit_of_measurement": "EUR/kWh",
+        "minimum": -1,
+        "maximum": 1,
+        "price_key": "return_t1",
+    },
+    {
+        "entity_id": "input_number.energy_return_kwh_high_t2_price",
+        "name": "Energy Return kWh High (T2) Price",
+        "unit_of_measurement": "EUR/kWh",
+        "minimum": -1,
+        "maximum": 1,
+        "price_key": "return_t2",
     },
     {
         "entity_id": "input_number.gas_m3_price",
         "name": "Gas m3 Price",
         "unit_of_measurement": "EUR/m³",
+        "minimum": 0,
         "maximum": 5,
         "price_key": "gas",
     },
@@ -101,7 +123,7 @@ def _current_period(periods: list[Period], today: date | None = None) -> Period 
 def _helper_config(helper: Helper) -> dict[str, Any]:
     return {
         "name": helper["name"],
-        "min": 0,
+        "min": helper["minimum"],
         "max": helper["maximum"],
         "step": 0.00001,
         "mode": "box",
