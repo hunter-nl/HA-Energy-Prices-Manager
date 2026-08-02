@@ -4,6 +4,23 @@ If you find this project useful, consider supporting its development:
 <a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="180" height="50"></a>
 
 # Changelog
+## [v1.0.4](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v1.0.4)
+
+
+
+### ❓ Miscellaneous
+
+- [Fix(app): shut down cleanly on SIGTERM](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/50) ([#50](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/50))
+
+
+
+
+
+
+
+
+
+
 ## [v1.0.3](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v1.0.3)
 
 
