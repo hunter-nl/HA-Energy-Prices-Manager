@@ -4,16 +4,32 @@ If you find this project useful, consider supporting its development:
 <a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="180" height="50"></a>
 
 # Changelog
+## [v1.0.6](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v1.0.6)
+
+
+
+
+
+
+### 🐛 Fixes
+
+- [Fix(changelog): classify conventional PR titles](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/55) ([#55](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/55))
+
+- [Fix(release): enable automatic PR labels](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/54) ([#54](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/54))
+
+
+
+
+
+
+
 ## [v1.0.5](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v1.0.5)
 
 
 
-### ❓ Miscellaneous
+### 🐛 Fixes
 
 - [Fix(web): refresh ingress icon](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/52) ([#52](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/52))
-
-
-
 
 
 
@@ -25,12 +41,9 @@ If you find this project useful, consider supporting its development:
 
 
 
-### ❓ Miscellaneous
+### 🐛 Fixes
 
 - [Fix(app): shut down cleanly on SIGTERM](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/50) ([#50](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/50))
-
-
-
 
 
 
@@ -42,12 +55,9 @@ If you find this project useful, consider supporting its development:
 
 
 
-### ❓ Miscellaneous
+### 🐛 Fixes
 
 - [Fix(changelog): use Unicode question mark heading](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/48) ([#48](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/48))
-
-
-
 
 
 
