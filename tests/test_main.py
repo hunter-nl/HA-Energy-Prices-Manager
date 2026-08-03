@@ -1,6 +1,7 @@
 """Tests for the App's price-period and helper configuration logic."""
 
 import json
+import os
 from datetime import date
 from pathlib import Path
 
@@ -152,3 +153,17 @@ def test_helper_configuration_matches_energy_dashboard_requirements() -> None:
     assert gas["min"] == 0
     assert gas["max"] == 5
     assert gas["unit_of_measurement"] == "EUR/m³"
+
+
+def test_ingress_assets_are_not_cached() -> None:
+    """An App upgrade must not leave a cached UI using a changed API schema."""
+    static_files = main.NoCacheStaticFiles(directory=main.WEB_DIR, html=True)
+    index_file = main.WEB_DIR / "index.html"
+
+    response = static_files.file_response(
+        index_file,
+        os.stat(index_file),
+        {"type": "http", "method": "GET", "path": "/", "headers": []},
+    )
+
+    assert response.headers["cache-control"] == "no-store, max-age=0"
