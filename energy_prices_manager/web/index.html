@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Energy Prices Manager</title>
+    <title data-i18n="title">Energy Prices Manager</title>
 
     <!-- Home Assistant fonts/icons -->
     <link
@@ -21,8 +21,8 @@
           <div class="header-left">
             <img src="icon.png" alt="Energy Manager" class="header-icon" />
             <div>
-              <h1>Energy Prices Manager</h1>
-              <p class="subtitle">
+              <h1 data-i18n="title">Energy Prices Manager</h1>
+              <p class="subtitle" data-i18n="subtitle">
                 Configure electricity and gas tariff periods
               </p>
             </div>
@@ -31,11 +31,11 @@
 
         <section class="ha-card current-card">
           <div class="card-header">
-            <h2>Current active period</h2>
+            <h2 data-i18n="current_period">Current active period</h2>
           </div>
 
           <div id="current-info" class="card-content">
-            <div class="empty-state">Loading current period…</div>
+            <div class="empty-state" data-i18n="loading">Loading current period…</div>
           </div>
         </section>
 
@@ -44,13 +44,13 @@
             <table id="periods-table">
               <thead>
                 <tr>
-                  <th>Start date</th>
-                  <th>End date</th>
-                  <th>Low electricity T1 (€)</th>
-                  <th>High electricity T2 (€)</th>
-                  <th>Returned electricity T1 (€)</th>
-                  <th>Returned electricity T2 (€)</th>
-                  <th>Gas (€)</th>
+                  <th data-i18n="start_date">Start date</th>
+                  <th data-i18n="end_date">End date</th>
+                  <th data-i18n="import_electricity_t1_price">Electricity import T1 (€)</th>
+                  <th data-i18n="import_electricity_t2_price">Electricity import T2 (€)</th>
+                  <th data-i18n="export_electricity_t1_price">Electricity export T1 (€)</th>
+                  <th data-i18n="export_electricity_t2_price">Electricity export T2 (€)</th>
+                  <th data-i18n="gas_price">Gas (€)</th>
                   <th></th>
                 </tr>
               </thead>
@@ -61,13 +61,13 @@
         </section>
 
         <div class="actions">
-          <button id="add-row" class="ha-button secondary">➕ Add Row</button>
+          <button id="add-row" class="ha-button secondary" data-i18n="add_row">➕ Add Row</button>
 
-          <button id="reset-btn" class="ha-button secondary" type="button">
+          <button id="reset-btn" class="ha-button secondary" type="button" data-i18n="reset">
             ↺ Reset
           </button>
 
-          <button id="save-btn" class="ha-button primary" disabled>
+          <button id="save-btn" class="ha-button primary" disabled data-i18n="save">
             💾 Save
           </button>
         </div>

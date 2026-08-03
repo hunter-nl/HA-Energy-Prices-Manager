@@ -16,7 +16,7 @@ from typing import Any, Literal, TypedDict
 
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 from websockets.asyncio.client import connect
 
 DATA_FILE = Path("/data/energy_prices.json")
@@ -24,6 +24,12 @@ CORE_API_URL = "http://supervisor/core/api"
 CORE_WS_URL = "ws://supervisor/core/websocket"
 WEB_DIR = Path(__file__).parents[1] / "web"
 LOGGER = logging.getLogger(__name__)
+LEGACY_PERIOD_FIELDS = (
+    ("t1", "import_t1"),
+    ("t2", "import_t2"),
+    ("return_t1", "export_t1"),
+    ("return_t2", "export_t2"),
+)
 
 
 class Helper(TypedDict):
@@ -34,53 +40,55 @@ class Helper(TypedDict):
     unit_of_measurement: str
     minimum: int
     maximum: int
-    price_key: Literal["t1", "t2", "return_t1", "return_t2", "gas"]
+    price_key: Literal["import_t1", "import_t2", "export_t1", "export_t2", "gas"]
 
 
 class Period(BaseModel):
     """A dated set of energy prices."""
 
+    model_config = ConfigDict(extra="forbid")
+
     start: date
     end: date
-    t1: float
-    t2: float
-    return_t1: float = 0
-    return_t2: float = 0
+    import_t1: float
+    import_t2: float
+    export_t1: float = 0
+    export_t2: float = 0
     gas: float = Field(ge=0)
 
 
 HELPERS: tuple[Helper, ...] = (
     {
-        "entity_id": "input_number.energy_kwh_low_t1_price",
-        "name": "Energy kWh Low (T1) Price",
+        "entity_id": "input_number.electricity_import_t1_price",
+        "name": "Electricity Import (T1) Price",
         "unit_of_measurement": "EUR/kWh",
         "minimum": -1,
         "maximum": 1,
-        "price_key": "t1",
+        "price_key": "import_t1",
     },
     {
-        "entity_id": "input_number.energy_kwh_high_t2_price",
-        "name": "Energy kWh High (T2) Price",
+        "entity_id": "input_number.electricity_import_t2_price",
+        "name": "Electricity Import (T2) Price",
         "unit_of_measurement": "EUR/kWh",
         "minimum": -1,
         "maximum": 1,
-        "price_key": "t2",
+        "price_key": "import_t2",
     },
     {
-        "entity_id": "input_number.energy_return_kwh_low_t1_price",
-        "name": "Energy Return kWh Low (T1) Price",
+        "entity_id": "input_number.electricity_export_t1_price",
+        "name": "Electricity Export (T1) Price",
         "unit_of_measurement": "EUR/kWh",
         "minimum": -1,
         "maximum": 1,
-        "price_key": "return_t1",
+        "price_key": "export_t1",
     },
     {
-        "entity_id": "input_number.energy_return_kwh_high_t2_price",
-        "name": "Energy Return kWh High (T2) Price",
+        "entity_id": "input_number.electricity_export_t2_price",
+        "name": "Electricity Export (T2) Price",
         "unit_of_measurement": "EUR/kWh",
         "minimum": -1,
         "maximum": 1,
-        "price_key": "return_t2",
+        "price_key": "export_t2",
     },
     {
         "entity_id": "input_number.gas_m3_price",
@@ -93,10 +101,30 @@ HELPERS: tuple[Helper, ...] = (
 )
 
 
+def _write_periods(periods: list[Period]) -> None:
+    DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
+    temporary_file = DATA_FILE.with_suffix(".tmp")
+    temporary_file.write_text(json.dumps([period.model_dump(mode="json") for period in periods], indent=2))
+    temporary_file.replace(DATA_FILE)
+
+
+def _migrate_legacy_period_fields(data: dict[str, Any]) -> dict[str, Any]:
+    migrated = data.copy()
+    for legacy_field, current_field in LEGACY_PERIOD_FIELDS:
+        if legacy_field in migrated:
+            migrated.setdefault(current_field, migrated[legacy_field])
+            del migrated[legacy_field]
+    return migrated
+
+
 def _load_periods() -> list[Period]:
     if not DATA_FILE.exists():
         return []
-    return [Period.model_validate(item) for item in json.loads(DATA_FILE.read_text())]
+    stored_periods = json.loads(DATA_FILE.read_text())
+    periods = [Period.model_validate(_migrate_legacy_period_fields(item)) for item in stored_periods]
+    if stored_periods != [period.model_dump(mode="json") for period in periods]:
+        _write_periods(periods)
+    return periods
 
 
 def _validate_periods(periods: list[Period]) -> list[Period]:
@@ -111,8 +139,7 @@ def _validate_periods(periods: list[Period]) -> list[Period]:
 
 
 def _save_periods(periods: list[Period]) -> None:
-    DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
-    DATA_FILE.write_text(json.dumps([period.model_dump(mode="json") for period in periods], indent=2))
+    _write_periods(periods)
 
 
 def _current_period(periods: list[Period], today: date | None = None) -> Period | None:
