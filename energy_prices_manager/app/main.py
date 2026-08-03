@@ -17,6 +17,8 @@ from typing import Any, Literal, TypedDict
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
+from starlette.responses import Response
+from starlette.types import Scope
 from websockets.asyncio.client import connect
 
 DATA_FILE = Path("/data/energy_prices.json")
@@ -30,6 +32,21 @@ LEGACY_PERIOD_FIELDS = (
     ("return_t1", "export_t1"),
     ("return_t2", "export_t2"),
 )
+
+
+class NoCacheStaticFiles(StaticFiles):
+    """Ensure an upgraded App never runs a previously cached ingress UI."""
+
+    def file_response(
+        self,
+        full_path: str | os.PathLike[str],
+        stat_result: os.stat_result,
+        scope: Scope,
+        status_code: int = 200,
+    ) -> Response:
+        response = super().file_response(full_path, stat_result, scope, status_code)
+        response.headers["Cache-Control"] = "no-store, max-age=0"
+        return response
 
 
 class Helper(TypedDict):
@@ -268,4 +285,4 @@ async def save_periods(periods: list[Period]) -> dict[str, int | str]:
     return {"status": "ok", "saved": len(periods)}
 
 
-app.mount("/", StaticFiles(directory=WEB_DIR, html=True), name="web")
+app.mount("/", NoCacheStaticFiles(directory=WEB_DIR, html=True), name="web")
