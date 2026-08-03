@@ -27,8 +27,8 @@ def test_period_allows_signed_electricity_prices_and_defaults_return_prices() ->
     assert period.return_t2 == 0
 
 
-def test_period_allows_signed_returned_electricity_prices() -> None:
-    """Returned electricity can either earn or cost money."""
+def test_period_allows_signed_export_electricity_prices() -> None:
+    """Exported electricity can either earn or cost money."""
     period = main.Period(
         start=date(2026, 1, 1),
         end=date(2026, 1, 31),
@@ -70,10 +70,18 @@ def test_current_period_selects_only_active_range() -> None:
 
 def test_helper_configuration_matches_energy_dashboard_requirements() -> None:
     """The App creates the requested English helpers with precise units/settings."""
-    low, high, return_low, return_high, gas = (main._helper_config(helper) for helper in main.HELPERS)
+    import_t1, import_t2, export_t1, export_t2, gas = (main._helper_config(helper) for helper in main.HELPERS)
 
-    assert low == {
-        "name": "Energy kWh Low (T1) Price",
+    assert [helper["entity_id"] for helper in main.HELPERS] == [
+        "input_number.electricity_import_t1_price",
+        "input_number.electricity_import_t2_price",
+        "input_number.electricity_export_t1_price",
+        "input_number.electricity_export_t2_price",
+        "input_number.gas_m3_price",
+    ]
+
+    assert import_t1 == {
+        "name": "Electricity Import (T1) Price",
         "min": -1,
         "max": 1,
         "step": 0.00001,
@@ -81,11 +89,11 @@ def test_helper_configuration_matches_energy_dashboard_requirements() -> None:
         "unit_of_measurement": "EUR/kWh",
         "icon": "mdi:currency-eur",
     }
-    assert high["name"] == "Energy kWh High (T2) Price"
-    assert return_low["name"] == "Energy Return kWh Low (T1) Price"
-    assert return_low["min"] == -1
-    assert return_low["max"] == 1
-    assert return_high["name"] == "Energy Return kWh High (T2) Price"
+    assert import_t2["name"] == "Electricity Import (T2) Price"
+    assert export_t1["name"] == "Electricity Export (T1) Price"
+    assert export_t1["min"] == -1
+    assert export_t1["max"] == 1
+    assert export_t2["name"] == "Electricity Export (T2) Price"
     assert gas["name"] == "Gas m3 Price"
     assert gas["min"] == 0
     assert gas["max"] == 5

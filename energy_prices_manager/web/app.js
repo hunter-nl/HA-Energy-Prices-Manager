@@ -9,6 +9,29 @@ const API_BASE_PATH = "api";
 
 let periods = [];
 let originalPeriods = [];
+let translations = {};
+
+function t(key, replacements = {}) {
+  let value = translations[key] ?? key;
+  Object.entries(replacements).forEach(([name, replacement]) => {
+    value = value.replaceAll(`{${name}}`, replacement);
+  });
+  return value;
+}
+
+async function loadTranslations() {
+  const response = await fetch("translations.json");
+  if (!response.ok) throw new Error("Unable to load translations.");
+  const allTranslations = await response.json();
+  const language = navigator.language?.toLowerCase().startsWith("nl")
+    ? "nl"
+    : "en";
+  translations = allTranslations[language] ?? allTranslations.en;
+  document.documentElement.lang = language;
+  document.querySelectorAll("[data-i18n]").forEach((element) => {
+    element.textContent = t(element.dataset.i18n);
+  });
+}
 
 // Listen for system theme changes (when HA theme changes)
 const darkModePreference = window.matchMedia("(prefers-color-scheme: dark)");
@@ -31,33 +54,25 @@ function formatCurrency(value) {
 
 function validatePeriod(period, index) {
   const errors = [];
-  if (!period.start) errors.push(`Row ${index + 1}: start date is required.`);
-  if (!period.end) errors.push(`Row ${index + 1}: end date is required.`);
+  if (!period.start) errors.push(t("row_start_required", { row: index + 1 }));
+  if (!period.end) errors.push(t("row_end_required", { row: index + 1 }));
   if (period.start && period.end && period.start > period.end) {
-    errors.push(`Row ${index + 1}: start date must be on or before end date.`);
+    errors.push(t("row_date_order", { row: index + 1 }));
   }
   if (!Number.isFinite(period.t1)) {
-    errors.push(
-      `Row ${index + 1}: low electricity price must be a number.`,
-    );
+    errors.push(t("row_t1_invalid", { row: index + 1 }));
   }
   if (!Number.isFinite(period.t2)) {
-    errors.push(
-      `Row ${index + 1}: high electricity price must be a number.`,
-    );
+    errors.push(t("row_t2_invalid", { row: index + 1 }));
   }
   if (!Number.isFinite(period.return_t1)) {
-    errors.push(
-      `Row ${index + 1}: returned low electricity price must be a number.`,
-    );
+    errors.push(t("row_return_t1_invalid", { row: index + 1 }));
   }
   if (!Number.isFinite(period.return_t2)) {
-    errors.push(
-      `Row ${index + 1}: returned high electricity price must be a number.`,
-    );
+    errors.push(t("row_return_t2_invalid", { row: index + 1 }));
   }
   if (!Number.isFinite(period.gas) || period.gas < 0) {
-    errors.push(`Row ${index + 1}: gas price must be a non-negative number.`);
+    errors.push(t("row_gas_invalid", { row: index + 1 }));
   }
   return errors;
 }
@@ -82,7 +97,7 @@ function validateAllPeriods() {
       period.end &&
       hasOverlap(period.start, period.end, index)
     ) {
-      errors.push(`Row ${index + 1}: overlaps with another period.`);
+      errors.push(t("row_overlap", { row: index + 1 }));
     }
   });
   return errors;
@@ -135,17 +150,17 @@ function renderCurrentInfo(active) {
   if (!active || active.detail) {
     const emptyState = document.createElement("div");
     emptyState.className = "empty-state";
-    emptyState.textContent = "No active period for today.";
+    emptyState.textContent = t("no_active_period");
     infoCard.appendChild(emptyState);
     return;
   }
   const rows = [
-    ["Active period", `${active.start} → ${active.end}`],
-    ["Low electricity", `€${formatCurrency(active.t1)}`],
-    ["High electricity", `€${formatCurrency(active.t2)}`],
-    ["Returned low electricity", `€${formatCurrency(active.return_t1)}`],
-    ["Returned high electricity", `€${formatCurrency(active.return_t2)}`],
-    ["Gas", `€${formatCurrency(active.gas)}`],
+    [t("active_period"), `${active.start} → ${active.end}`],
+    [t("import_electricity_t1"), `€${formatCurrency(active.t1)}`],
+    [t("import_electricity_t2"), `€${formatCurrency(active.t2)}`],
+    [t("export_electricity_t1"), `€${formatCurrency(active.return_t1)}`],
+    [t("export_electricity_t2"), `€${formatCurrency(active.return_t2)}`],
+    [t("gas"), `€${formatCurrency(active.gas)}`],
   ];
   rows.forEach(([label, value]) => {
     const row = document.createElement("div");
@@ -195,13 +210,13 @@ function renderTable() {
     }
 
     const inputs = [
-      createInput("date", period.start, "Start date"),
-      createInput("date", period.end, "End date"),
-      createInput("number", period.t1, "Low electricity price"),
-      createInput("number", period.t2, "High electricity price"),
-      createInput("number", period.return_t1, "Returned low electricity price"),
-      createInput("number", period.return_t2, "Returned high electricity price"),
-      createInput("number", period.gas, "Gas price", "0"),
+      createInput("date", period.start, t("aria_start_date")),
+      createInput("date", period.end, t("aria_end_date")),
+      createInput("number", period.t1, t("aria_t1_price")),
+      createInput("number", period.t2, t("aria_t2_price")),
+      createInput("number", period.return_t1, t("aria_return_t1_price")),
+      createInput("number", period.return_t2, t("aria_return_t2_price")),
+      createInput("number", period.gas, t("aria_gas_price"), "0"),
     ];
     inputs.forEach((input) => {
       const cell = document.createElement("td");
@@ -213,7 +228,7 @@ function renderTable() {
     const deleteButton = document.createElement("button");
     deleteButton.className = "delete";
     deleteButton.type = "button";
-    deleteButton.title = "Delete row";
+    deleteButton.title = t("delete_row");
     deleteButton.textContent = "🗑️";
     deleteCell.appendChild(deleteButton);
     tr.appendChild(deleteCell);
@@ -230,7 +245,7 @@ function renderTable() {
           periods[index].end
         ) {
           if (hasOverlap(periods[index].start, periods[index].end, index)) {
-            setStatus("Overlap detected with another period.", "error");
+            setStatus(t("overlap_error"), "error");
           } else {
             setStatus("", "info");
           }
@@ -240,7 +255,7 @@ function renderTable() {
     });
 
     deleteButton.addEventListener("click", () => {
-      if (confirm("Delete this period?")) {
+      if (confirm(t("delete_confirm"))) {
         periods.splice(index, 1);
         renderTable();
       }
@@ -265,7 +280,7 @@ async function loadPeriods() {
     const currentData = currentRes.ok ? await currentRes.json() : null;
     renderCurrentInfo(currentData);
   } catch (error) {
-    setStatus("Unable to load period data. Check backend status.", "error");
+    setStatus(t("load_error"), "error");
     console.error(error);
   }
 }
@@ -273,7 +288,7 @@ async function loadPeriods() {
 function resetChanges() {
   periods = originalPeriods.map((p) => ({ ...p }));
   renderTable();
-  setStatus("Changes discarded.", "info");
+  setStatus(t("reset_success"), "info");
 }
 
 function sortPeriodsByStart(data) {
@@ -321,15 +336,24 @@ saveBtn.addEventListener("click", async () => {
     periods = sortedData;
     originalPeriods = periods.map((p) => ({ ...p }));
     renderTable();
-    setStatus("Periods saved successfully.", "success");
+    setStatus(t("save_success"), "success");
     const currentData = await fetch(`${API_BASE_PATH}/current`).then((r) =>
       r.ok ? r.json() : null,
     );
     renderCurrentInfo(currentData);
   } catch (error) {
-    setStatus(error.message || "Error saving periods.", "error");
+    setStatus(error.message || t("save_error"), "error");
     console.error(error);
   }
 });
 
-loadPeriods();
+async function initialize() {
+  try {
+    await loadTranslations();
+  } catch (error) {
+    console.error(error);
+  }
+  await loadPeriods();
+}
+
+initialize();

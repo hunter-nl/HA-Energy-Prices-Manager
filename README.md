@@ -20,21 +20,27 @@ Energy Prices Manager is a Home Assistant App for maintaining fixed or variable
 electricity and gas tariff periods. Its Ingress page appears in the sidebar and
 needs no separate browser authentication.
 
-The App creates and manages these helpers, preserving the entity IDs that the
-Energy dashboard uses:
+The App creates and manages these helpers for the Energy dashboard:
 
 | Helper | Entity ID | Unit | Range |
 | --- | --- | --- | --- |
-| Energy kWh Low (T1) Price | `input_number.energy_kwh_low_t1_price` | EUR/kWh | -1–1 |
-| Energy kWh High (T2) Price | `input_number.energy_kwh_high_t2_price` | EUR/kWh | -1–1 |
-| Energy Return kWh Low (T1) Price | `input_number.energy_return_kwh_low_t1_price` | EUR/kWh | -1–1 |
-| Energy Return kWh High (T2) Price | `input_number.energy_return_kwh_high_t2_price` | EUR/kWh | -1–1 |
+| Electricity Import (T1) Price | `input_number.electricity_import_t1_price` | EUR/kWh | -1–1 |
+| Electricity Import (T2) Price | `input_number.electricity_import_t2_price` | EUR/kWh | -1–1 |
+| Electricity Export (T1) Price | `input_number.electricity_export_t1_price` | EUR/kWh | -1–1 |
+| Electricity Export (T2) Price | `input_number.electricity_export_t2_price` | EUR/kWh | -1–1 |
 | Gas m3 Price | `input_number.gas_m3_price` | EUR/m³ | 0–5 |
 
 All helpers use an input field, a `0.00001` step, and `mdi:currency-eur`.
 They are created/normalised when the App starts, updated immediately when a
 period is saved, and refreshed shortly after midnight. No separate sensor or
 automation is needed.
+
+### Breaking helper rename
+
+The Import/Export helper names and entity IDs replace the previous Low/High
+and Return helper IDs. Update your Energy dashboard price selections to the
+new helpers after upgrading. Existing helpers are left untouched so you can
+migrate dashboard references safely; they are no longer updated by the App.
 
 ## Install from this App repository
 
@@ -72,17 +78,17 @@ not discard them.
 In the Energy dashboard configuration, select the managed helper that matches
 your tariff:
 
-- `input_number.energy_kwh_low_t1_price` for T1 electricity imported from the grid.
-- `input_number.energy_kwh_high_t2_price` for T2 electricity imported from the grid.
-- `input_number.energy_return_kwh_low_t1_price` for T1 electricity returned to the grid.
-- `input_number.energy_return_kwh_high_t2_price` for T2 electricity returned to the grid.
+- `input_number.electricity_import_t1_price` for T1 electricity imported from the grid.
+- `input_number.electricity_import_t2_price` for T2 electricity imported from the grid.
+- `input_number.electricity_export_t1_price` for T1 electricity exported to the grid.
+- `input_number.electricity_export_t2_price` for T2 electricity exported to the grid.
 - `input_number.gas_m3_price` for gas.
 
-Configure the two returned-electricity helpers as the grid source's **Return to
-grid** prices. A positive returned-electricity price is compensation paid to
-you; a negative price is a charge for returning electricity. Import electricity
-prices can also be negative for dynamic contracts, indicating that you are paid
-to consume electricity from the grid.
+Configure the two electricity-export helpers as the grid source's **Return to
+grid** prices. A positive export price is compensation paid to you; a negative
+price is a charge for exporting electricity. Import electricity prices can also
+be negative for dynamic contracts, indicating that you are paid to consume
+electricity from the grid.
 
 Home Assistant uses current price helpers for new energy data; changing a
 period does not retroactively recalculate historical costs.

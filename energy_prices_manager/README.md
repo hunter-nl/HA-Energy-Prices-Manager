@@ -21,10 +21,10 @@ the current-price helpers up to date automatically at startup, at midnight,
 and whenever you save a period.
 
 Install the app, start it, then open **Energy Prices Manager** from the sidebar
-to add or update tariff periods. The app creates import electricity T1/T2,
-returned-electricity T1/T2, and gas price helpers when it starts. Electricity
-prices can be positive or negative; a positive returned-electricity price is
-compensation, while a negative one is a charge for returning power to the grid.
+to add or update tariff periods. The app creates electricity import T1/T2,
+electricity export T1/T2, and gas price helpers when it starts. Electricity
+prices can be positive or negative; a positive export price is compensation,
+while a negative one is a charge for exporting power to the grid.
 
 For usage, installation, and troubleshooting, see the repository
 [documentation](../README.md).
