@@ -4,6 +4,26 @@ If you find this project useful, consider supporting its development:
 <a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="180" height="50"></a>
 
 # Changelog
+## [v2.0.0](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v2.0.0)
+
+
+
+### 🚨 Breaking changes
+
+- [Feat!: rename electricity helpers to import/export (breaking change)](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/61) ([#61](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/61))
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## [v1.1.0](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v1.1.0)
 
 
