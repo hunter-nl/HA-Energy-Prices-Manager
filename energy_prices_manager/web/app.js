@@ -59,17 +59,17 @@ function validatePeriod(period, index) {
   if (period.start && period.end && period.start > period.end) {
     errors.push(t("row_date_order", { row: index + 1 }));
   }
-  if (!Number.isFinite(period.t1)) {
-    errors.push(t("row_t1_invalid", { row: index + 1 }));
+  if (!Number.isFinite(period.import_t1)) {
+    errors.push(t("row_import_t1_invalid", { row: index + 1 }));
   }
-  if (!Number.isFinite(period.t2)) {
-    errors.push(t("row_t2_invalid", { row: index + 1 }));
+  if (!Number.isFinite(period.import_t2)) {
+    errors.push(t("row_import_t2_invalid", { row: index + 1 }));
   }
-  if (!Number.isFinite(period.return_t1)) {
-    errors.push(t("row_return_t1_invalid", { row: index + 1 }));
+  if (!Number.isFinite(period.export_t1)) {
+    errors.push(t("row_export_t1_invalid", { row: index + 1 }));
   }
-  if (!Number.isFinite(period.return_t2)) {
-    errors.push(t("row_return_t2_invalid", { row: index + 1 }));
+  if (!Number.isFinite(period.export_t2)) {
+    errors.push(t("row_export_t2_invalid", { row: index + 1 }));
   }
   if (!Number.isFinite(period.gas) || period.gas < 0) {
     errors.push(t("row_gas_invalid", { row: index + 1 }));
@@ -105,16 +105,16 @@ function validateAllPeriods() {
 
 function getTableData() {
   return Array.from(tableBody.rows).map((row) => {
-    const [start, end, t1, t2, return_t1, return_t2, gas] = Array.from(
+    const [start, end, import_t1, import_t2, export_t1, export_t2, gas] = Array.from(
       row.querySelectorAll("input"),
     ).map((input) => input.value);
     return {
       start,
       end,
-      t1: parseFloat(t1),
-      t2: parseFloat(t2),
-      return_t1: parseFloat(return_t1),
-      return_t2: parseFloat(return_t2),
+      import_t1: parseFloat(import_t1),
+      import_t2: parseFloat(import_t2),
+      export_t1: parseFloat(export_t1),
+      export_t2: parseFloat(export_t2),
       gas: parseFloat(gas),
     };
   });
@@ -129,10 +129,10 @@ function dataChanged() {
     if (
       a.start !== b.start ||
       a.end !== b.end ||
-      a.t1 !== b.t1 ||
-      a.t2 !== b.t2 ||
-      a.return_t1 !== b.return_t1 ||
-      a.return_t2 !== b.return_t2 ||
+      a.import_t1 !== b.import_t1 ||
+      a.import_t2 !== b.import_t2 ||
+      a.export_t1 !== b.export_t1 ||
+      a.export_t2 !== b.export_t2 ||
       a.gas !== b.gas
     ) {
       return true;
@@ -156,10 +156,10 @@ function renderCurrentInfo(active) {
   }
   const rows = [
     [t("active_period"), `${active.start} → ${active.end}`],
-    [t("import_electricity_t1"), `€${formatCurrency(active.t1)}`],
-    [t("import_electricity_t2"), `€${formatCurrency(active.t2)}`],
-    [t("export_electricity_t1"), `€${formatCurrency(active.return_t1)}`],
-    [t("export_electricity_t2"), `€${formatCurrency(active.return_t2)}`],
+    [t("import_electricity_t1"), `€${formatCurrency(active.import_t1)}`],
+    [t("import_electricity_t2"), `€${formatCurrency(active.import_t2)}`],
+    [t("export_electricity_t1"), `€${formatCurrency(active.export_t1)}`],
+    [t("export_electricity_t2"), `€${formatCurrency(active.export_t2)}`],
     [t("gas"), `€${formatCurrency(active.gas)}`],
   ];
   rows.forEach(([label, value]) => {
@@ -212,10 +212,10 @@ function renderTable() {
     const inputs = [
       createInput("date", period.start, t("aria_start_date")),
       createInput("date", period.end, t("aria_end_date")),
-      createInput("number", period.t1, t("aria_t1_price")),
-      createInput("number", period.t2, t("aria_t2_price")),
-      createInput("number", period.return_t1, t("aria_return_t1_price")),
-      createInput("number", period.return_t2, t("aria_return_t2_price")),
+      createInput("number", period.import_t1, t("aria_import_t1_price")),
+      createInput("number", period.import_t2, t("aria_import_t2_price")),
+      createInput("number", period.export_t1, t("aria_export_t1_price")),
+      createInput("number", period.export_t2, t("aria_export_t2_price")),
       createInput("number", period.gas, t("aria_gas_price"), "0"),
     ];
     inputs.forEach((input) => {
@@ -233,7 +233,15 @@ function renderTable() {
     deleteCell.appendChild(deleteButton);
     tr.appendChild(deleteCell);
 
-    const keys = ["start", "end", "t1", "t2", "return_t1", "return_t2", "gas"];
+    const keys = [
+      "start",
+      "end",
+      "import_t1",
+      "import_t2",
+      "export_t1",
+      "export_t2",
+      "gas",
+    ];
     inputs.forEach((input, i) => {
       input.addEventListener("keydown", handleTableTab);
       input.addEventListener("input", () => {
@@ -299,10 +307,10 @@ addBtn.addEventListener("click", () => {
   periods.push({
     start: "",
     end: "",
-    t1: 0.0,
-    t2: 0.0,
-    return_t1: 0.0,
-    return_t2: 0.0,
+    import_t1: 0.0,
+    import_t2: 0.0,
+    export_t1: 0.0,
+    export_t2: 0.0,
     gas: 0.0,
   });
   renderTable();

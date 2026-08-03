@@ -11,20 +11,51 @@ def test_validate_periods_sorts_valid_periods() -> None:
     """Valid periods are normalized and sorted by start date."""
     periods = main._validate_periods(
         [
-            main.Period(start=date(2026, 7, 1), end=date(2026, 7, 31), t1=0.2, t2=0.3, gas=1.1),
-            main.Period(start=date(2026, 1, 1), end=date(2026, 6, 30), t1=0.1, t2=0.2, gas=1.0),
+            main.Period(
+                start=date(2026, 7, 1),
+                end=date(2026, 7, 31),
+                import_t1=0.2,
+                import_t2=0.3,
+                gas=1.1,
+            ),
+            main.Period(
+                start=date(2026, 1, 1),
+                end=date(2026, 6, 30),
+                import_t1=0.1,
+                import_t2=0.2,
+                gas=1.0,
+            ),
         ]
     )
 
     assert [period.start for period in periods] == [date(2026, 1, 1), date(2026, 7, 1)]
 
 
-def test_period_allows_signed_electricity_prices_and_defaults_return_prices() -> None:
-    """Electricity can have a negative price and old periods remain compatible."""
-    period = main.Period(start=date(2026, 1, 1), end=date(2026, 1, 31), t1=-0.2, t2=-0.3, gas=1.1)
+def test_period_migrates_legacy_electricity_fields() -> None:
+    """Existing saved periods remain compatible after the API rename."""
+    period = main.Period.model_validate(
+        {
+            "start": "2026-01-01",
+            "end": "2026-01-31",
+            "t1": -0.2,
+            "t2": -0.3,
+            "gas": 1.1,
+        }
+    )
 
-    assert period.return_t1 == 0
-    assert period.return_t2 == 0
+    assert period.import_t1 == -0.2
+    assert period.import_t2 == -0.3
+    assert period.export_t1 == 0
+    assert period.export_t2 == 0
+    assert period.model_dump(mode="json") == {
+        "start": "2026-01-01",
+        "end": "2026-01-31",
+        "import_t1": -0.2,
+        "import_t2": -0.3,
+        "export_t1": 0,
+        "export_t2": 0,
+        "gas": 1.1,
+    }
 
 
 def test_period_allows_signed_export_electricity_prices() -> None:
@@ -32,28 +63,28 @@ def test_period_allows_signed_export_electricity_prices() -> None:
     period = main.Period(
         start=date(2026, 1, 1),
         end=date(2026, 1, 31),
-        t1=0.2,
-        t2=0.3,
-        return_t1=0.1,
-        return_t2=-0.1,
+        import_t1=0.2,
+        import_t2=0.3,
+        export_t1=0.1,
+        export_t2=-0.1,
         gas=1.1,
     )
 
-    assert period.return_t1 == 0.1
-    assert period.return_t2 == -0.1
+    assert period.export_t1 == 0.1
+    assert period.export_t2 == -0.1
 
 
 def test_period_rejects_a_negative_gas_price() -> None:
     """Gas remains a non-negative price."""
     with pytest.raises(ValueError):
-        main.Period(start=date(2026, 1, 1), end=date(2026, 1, 31), t1=0.2, t2=0.3, gas=-1)
+        main.Period(start=date(2026, 1, 1), end=date(2026, 1, 31), import_t1=0.2, import_t2=0.3, gas=-1)
 
 
 def test_validate_periods_rejects_an_overlap() -> None:
     """Adjacent periods cannot share a date."""
     periods = [
-        main.Period(start=date(2026, 1, 1), end=date(2026, 1, 31), t1=0.2, t2=0.3, gas=1.1),
-        main.Period(start=date(2026, 1, 31), end=date(2026, 2, 28), t1=0.2, t2=0.3, gas=1.1),
+        main.Period(start=date(2026, 1, 1), end=date(2026, 1, 31), import_t1=0.2, import_t2=0.3, gas=1.1),
+        main.Period(start=date(2026, 1, 31), end=date(2026, 2, 28), import_t1=0.2, import_t2=0.3, gas=1.1),
     ]
 
     with pytest.raises(ValueError, match="must not overlap"):
@@ -62,7 +93,7 @@ def test_validate_periods_rejects_an_overlap() -> None:
 
 def test_current_period_selects_only_active_range() -> None:
     """Only the period containing the supplied date is active."""
-    periods = [main.Period(start=date(2026, 1, 1), end=date(2026, 1, 31), t1=0.2, t2=0.3, gas=1.1)]
+    periods = [main.Period(start=date(2026, 1, 1), end=date(2026, 1, 31), import_t1=0.2, import_t2=0.3, gas=1.1)]
 
     assert main._current_period(periods, date(2026, 1, 15)) == periods[0]
     assert main._current_period(periods, date(2026, 2, 1)) is None

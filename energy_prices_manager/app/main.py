@@ -16,7 +16,7 @@ from typing import Any, Literal, TypedDict
 
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, Field
+from pydantic import AliasChoices, BaseModel, Field
 from websockets.asyncio.client import connect
 
 DATA_FILE = Path("/data/energy_prices.json")
@@ -34,7 +34,7 @@ class Helper(TypedDict):
     unit_of_measurement: str
     minimum: int
     maximum: int
-    price_key: Literal["t1", "t2", "return_t1", "return_t2", "gas"]
+    price_key: Literal["import_t1", "import_t2", "export_t1", "export_t2", "gas"]
 
 
 class Period(BaseModel):
@@ -42,10 +42,10 @@ class Period(BaseModel):
 
     start: date
     end: date
-    t1: float
-    t2: float
-    return_t1: float = 0
-    return_t2: float = 0
+    import_t1: float = Field(validation_alias=AliasChoices("import_t1", "t1"))
+    import_t2: float = Field(validation_alias=AliasChoices("import_t2", "t2"))
+    export_t1: float = Field(default=0, validation_alias=AliasChoices("export_t1", "return_t1"))
+    export_t2: float = Field(default=0, validation_alias=AliasChoices("export_t2", "return_t2"))
     gas: float = Field(ge=0)
 
 
@@ -56,7 +56,7 @@ HELPERS: tuple[Helper, ...] = (
         "unit_of_measurement": "EUR/kWh",
         "minimum": -1,
         "maximum": 1,
-        "price_key": "t1",
+        "price_key": "import_t1",
     },
     {
         "entity_id": "input_number.electricity_import_t2_price",
@@ -64,7 +64,7 @@ HELPERS: tuple[Helper, ...] = (
         "unit_of_measurement": "EUR/kWh",
         "minimum": -1,
         "maximum": 1,
-        "price_key": "t2",
+        "price_key": "import_t2",
     },
     {
         "entity_id": "input_number.electricity_export_t1_price",
@@ -72,7 +72,7 @@ HELPERS: tuple[Helper, ...] = (
         "unit_of_measurement": "EUR/kWh",
         "minimum": -1,
         "maximum": 1,
-        "price_key": "return_t1",
+        "price_key": "export_t1",
     },
     {
         "entity_id": "input_number.electricity_export_t2_price",
@@ -80,7 +80,7 @@ HELPERS: tuple[Helper, ...] = (
         "unit_of_measurement": "EUR/kWh",
         "minimum": -1,
         "maximum": 1,
-        "price_key": "return_t2",
+        "price_key": "export_t2",
     },
     {
         "entity_id": "input_number.gas_m3_price",
