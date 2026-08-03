@@ -1,6 +1,8 @@
 """Tests for the App's price-period and helper configuration logic."""
 
+import json
 from datetime import date
+from pathlib import Path
 
 import pytest
 
@@ -31,31 +33,52 @@ def test_validate_periods_sorts_valid_periods() -> None:
     assert [period.start for period in periods] == [date(2026, 1, 1), date(2026, 7, 1)]
 
 
-def test_period_migrates_legacy_electricity_fields() -> None:
-    """Existing saved periods remain compatible after the API rename."""
-    period = main.Period.model_validate(
-        {
-            "start": "2026-01-01",
-            "end": "2026-01-31",
-            "t1": -0.2,
-            "t2": -0.3,
-            "gas": 1.1,
-        }
+def test_load_periods_migrates_legacy_electricity_fields(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Existing stored periods migrate before the renamed API is used."""
+    data_file = tmp_path / "energy_prices.json"
+    data_file.write_text(
+        json.dumps(
+            [
+                {
+                    "start": "2026-01-01",
+                    "end": "2026-01-31",
+                    "t1": -0.2,
+                    "t2": -0.3,
+                    "return_t1": 0.1,
+                    "return_t2": -0.1,
+                    "gas": 1.1,
+                }
+            ]
+        )
     )
+    monkeypatch.setattr(main, "DATA_FILE", data_file)
 
-    assert period.import_t1 == -0.2
-    assert period.import_t2 == -0.3
-    assert period.export_t1 == 0
-    assert period.export_t2 == 0
-    assert period.model_dump(mode="json") == {
+    periods = main._load_periods()
+
+    assert periods[0].model_dump(mode="json") == {
         "start": "2026-01-01",
         "end": "2026-01-31",
         "import_t1": -0.2,
         "import_t2": -0.3,
-        "export_t1": 0,
-        "export_t2": 0,
+        "export_t1": 0.1,
+        "export_t2": -0.1,
         "gas": 1.1,
     }
+    assert json.loads(data_file.read_text()) == [periods[0].model_dump(mode="json")]
+
+
+def test_period_rejects_legacy_api_fields() -> None:
+    """The public API exposes only the renamed import/export fields."""
+    with pytest.raises(ValueError):
+        main.Period.model_validate(
+            {
+                "start": "2026-01-01",
+                "end": "2026-01-31",
+                "t1": 0.2,
+                "t2": 0.3,
+                "gas": 1.1,
+            }
+        )
 
 
 def test_period_allows_signed_export_electricity_prices() -> None:

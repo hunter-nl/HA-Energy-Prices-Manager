@@ -42,8 +42,8 @@ and Return helper IDs. Update your Energy dashboard price selections to the
 new helpers after upgrading. Existing helpers are left untouched so you can
 migrate dashboard references safely; they are no longer updated by the App.
 The period API now uses `import_t1`, `import_t2`, `export_t1`, and `export_t2`.
-Existing saved periods with the previous field names remain readable, but API
-responses and future saves use the new field names.
+At startup, the App migrates existing saved periods to these fields; old API
+field names are no longer accepted.
 
 ## Install from this App repository
 

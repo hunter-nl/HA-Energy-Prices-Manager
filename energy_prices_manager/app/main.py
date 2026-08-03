@@ -16,7 +16,7 @@ from typing import Any, Literal, TypedDict
 
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
-from pydantic import AliasChoices, BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 from websockets.asyncio.client import connect
 
 DATA_FILE = Path("/data/energy_prices.json")
@@ -24,6 +24,12 @@ CORE_API_URL = "http://supervisor/core/api"
 CORE_WS_URL = "ws://supervisor/core/websocket"
 WEB_DIR = Path(__file__).parents[1] / "web"
 LOGGER = logging.getLogger(__name__)
+LEGACY_PERIOD_FIELDS = (
+    ("t1", "import_t1"),
+    ("t2", "import_t2"),
+    ("return_t1", "export_t1"),
+    ("return_t2", "export_t2"),
+)
 
 
 class Helper(TypedDict):
@@ -40,12 +46,14 @@ class Helper(TypedDict):
 class Period(BaseModel):
     """A dated set of energy prices."""
 
+    model_config = ConfigDict(extra="forbid")
+
     start: date
     end: date
-    import_t1: float = Field(validation_alias=AliasChoices("import_t1", "t1"))
-    import_t2: float = Field(validation_alias=AliasChoices("import_t2", "t2"))
-    export_t1: float = Field(default=0, validation_alias=AliasChoices("export_t1", "return_t1"))
-    export_t2: float = Field(default=0, validation_alias=AliasChoices("export_t2", "return_t2"))
+    import_t1: float
+    import_t2: float
+    export_t1: float = 0
+    export_t2: float = 0
     gas: float = Field(ge=0)
 
 
@@ -93,10 +101,30 @@ HELPERS: tuple[Helper, ...] = (
 )
 
 
+def _write_periods(periods: list[Period]) -> None:
+    DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
+    temporary_file = DATA_FILE.with_suffix(".tmp")
+    temporary_file.write_text(json.dumps([period.model_dump(mode="json") for period in periods], indent=2))
+    temporary_file.replace(DATA_FILE)
+
+
+def _migrate_legacy_period_fields(data: dict[str, Any]) -> dict[str, Any]:
+    migrated = data.copy()
+    for legacy_field, current_field in LEGACY_PERIOD_FIELDS:
+        if legacy_field in migrated:
+            migrated.setdefault(current_field, migrated[legacy_field])
+            del migrated[legacy_field]
+    return migrated
+
+
 def _load_periods() -> list[Period]:
     if not DATA_FILE.exists():
         return []
-    return [Period.model_validate(item) for item in json.loads(DATA_FILE.read_text())]
+    stored_periods = json.loads(DATA_FILE.read_text())
+    periods = [Period.model_validate(_migrate_legacy_period_fields(item)) for item in stored_periods]
+    if stored_periods != [period.model_dump(mode="json") for period in periods]:
+        _write_periods(periods)
+    return periods
 
 
 def _validate_periods(periods: list[Period]) -> list[Period]:
@@ -111,8 +139,7 @@ def _validate_periods(periods: list[Period]) -> list[Period]:
 
 
 def _save_periods(periods: list[Period]) -> None:
-    DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
-    DATA_FILE.write_text(json.dumps([period.model_dump(mode="json") for period in periods], indent=2))
+    _write_periods(periods)
 
 
 def _current_period(periods: list[Period], today: date | None = None) -> Period | None:
