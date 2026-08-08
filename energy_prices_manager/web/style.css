@@ -52,6 +52,10 @@ body {
  * -------------------------------------------------- */
 
 .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   margin-bottom: 24px;
 }
 
@@ -78,6 +82,35 @@ body {
   margin: 4px 0 0 0;
   color: var(--app-secondary-text);
   font-size: 14px;
+}
+
+.buymeacoffee-link {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 10px;
+  background: #ffdd00;
+  color: #000;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    background 0.2s,
+    transform 0.15s;
+}
+
+.buymeacoffee-link:hover {
+  background: #f5d400;
+  transform: translateY(-1px);
+}
+
+.buymeacoffee-link:focus-visible {
+  outline: 2px solid var(--app-primary-color);
+  outline-offset: 2px;
 }
 
 /* --------------------------------------------------
@@ -311,5 +344,13 @@ input[type="number"]:focus {
 
   .header h1 {
     font-size: 24px;
+  }
+
+  .header {
+    align-items: flex-start;
+  }
+
+  .buymeacoffee-link {
+    padding: 0 12px;
   }
 }
