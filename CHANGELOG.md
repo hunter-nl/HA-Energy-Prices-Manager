@@ -4,6 +4,20 @@ If you find this project useful, consider supporting its development:
 <a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="180" height="50"></a>
 
 # Changelog
+## [v2.0.4](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v2.0.4)
+
+
+
+### 🐛 Fixes
+
+- [Fix: align mobile tariff table fields](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/71) ([#71](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/71))
+
+
+
+
+
+
+
 ## [v2.0.3](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v2.0.3)
 
 
