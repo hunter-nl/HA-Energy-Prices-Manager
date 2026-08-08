@@ -218,18 +218,19 @@ function renderTable() {
       createInput("number", period.export_t2, t("aria_export_t2_price")),
       createInput("number", period.gas, t("aria_gas_price"), "0"),
     ];
-    const columnClasses = [
-      "date-column",
-      "date-column",
-      "price-column",
-      "price-column",
-      "price-column",
-      "price-column",
-      "price-column",
+    const columns = [
+      { className: "date-column", label: t("start_date") },
+      { className: "date-column", label: t("end_date") },
+      { className: "price-column", label: t("import_electricity_t1_price") },
+      { className: "price-column", label: t("import_electricity_t2_price") },
+      { className: "price-column", label: t("export_electricity_t1_price") },
+      { className: "price-column", label: t("export_electricity_t2_price") },
+      { className: "price-column", label: t("gas_price") },
     ];
     inputs.forEach((input, columnIndex) => {
       const cell = document.createElement("td");
-      cell.className = columnClasses[columnIndex];
+      cell.className = columns[columnIndex].className;
+      cell.dataset.label = columns[columnIndex].label;
       cell.appendChild(input);
       tr.appendChild(cell);
     });

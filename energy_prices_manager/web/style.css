@@ -341,35 +341,71 @@ input[type="number"]:focus {
     padding: 16px;
   }
 
-  th,
-  td {
-    padding: 12px 8px;
+  .table-wrapper {
+    overflow-x: visible;
   }
 
   #periods-table {
-    width: 804px;
-    min-width: 100%;
-    table-layout: fixed;
+    width: 100%;
+    min-width: 0;
+    border-collapse: separate;
+    border-spacing: 0 12px;
   }
 
-  #periods-table .date-column {
-    width: 144px;
-    min-width: 144px;
+  #periods-table colgroup,
+  #periods-table thead {
+    display: none;
   }
 
-  #periods-table .price-column {
-    width: 92px;
-    min-width: 92px;
+  #periods-table,
+  #periods-table tbody,
+  #periods-table tr,
+  #periods-table td {
+    display: block;
+    width: 100%;
   }
 
-  #periods-table .actions-column {
-    width: 56px;
-    min-width: 56px;
+  #periods-table tr {
+    overflow: hidden;
+    border: 1px solid var(--app-divider-color);
+    border-radius: var(--app-border-radius);
+    background: var(--app-card-bg);
+  }
+
+  #periods-table tr.current-period {
+    background: rgba(3, 169, 244, 0.08);
+  }
+
+  #periods-table td {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(128px, 1.3fr);
+    gap: 12px;
+    align-items: center;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--app-divider-color);
+  }
+
+  #periods-table td::before {
+    content: attr(data-label);
+    color: var(--app-secondary-text);
+    font-size: 12px;
+    font-weight: 500;
   }
 
   #periods-table input[type="date"],
   #periods-table input[type="number"] {
     min-width: 0;
+  }
+
+  #periods-table td.actions-column {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 12px;
+    border-bottom: none;
+  }
+
+  #periods-table td.actions-column::before {
+    content: none;
   }
 
   .header h1 {
