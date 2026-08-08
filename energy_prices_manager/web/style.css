@@ -239,6 +239,10 @@ input[type="number"] {
     background 0.2s;
 }
 
+input[type="number"] {
+  min-width: 110px;
+}
+
 input[type="date"]:focus,
 input[type="number"]:focus {
   outline: none;
