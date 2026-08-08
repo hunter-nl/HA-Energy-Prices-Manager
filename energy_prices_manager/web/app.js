@@ -218,13 +218,24 @@ function renderTable() {
       createInput("number", period.export_t2, t("aria_export_t2_price")),
       createInput("number", period.gas, t("aria_gas_price"), "0"),
     ];
-    inputs.forEach((input) => {
+    const columnClasses = [
+      "date-column",
+      "date-column",
+      "price-column",
+      "price-column",
+      "price-column",
+      "price-column",
+      "price-column",
+    ];
+    inputs.forEach((input, columnIndex) => {
       const cell = document.createElement("td");
+      cell.className = columnClasses[columnIndex];
       cell.appendChild(input);
       tr.appendChild(cell);
     });
 
     const deleteCell = document.createElement("td");
+    deleteCell.className = "actions-column";
     const deleteButton = document.createElement("button");
     deleteButton.className = "delete";
     deleteButton.type = "button";
