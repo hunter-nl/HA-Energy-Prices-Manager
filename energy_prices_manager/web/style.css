@@ -347,22 +347,27 @@ input[type="number"]:focus {
   }
 
   #periods-table {
-    width: max-content;
+    width: 804px;
     min-width: 100%;
+    table-layout: fixed;
   }
 
   #periods-table .date-column {
-    min-width: 130px;
+    width: 144px;
+    min-width: 144px;
   }
 
   #periods-table .price-column {
-    min-width: 105px;
+    width: 92px;
+    min-width: 92px;
   }
 
   #periods-table .actions-column {
-    min-width: 65px;
+    width: 56px;
+    min-width: 56px;
   }
 
+  #periods-table input[type="date"],
   #periods-table input[type="number"] {
     min-width: 0;
   }
