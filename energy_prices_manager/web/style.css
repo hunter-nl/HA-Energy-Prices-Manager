@@ -343,7 +343,28 @@ input[type="number"]:focus {
 
   th,
   td {
-    padding: 12px;
+    padding: 12px 8px;
+  }
+
+  #periods-table {
+    min-width: 850px;
+    table-layout: fixed;
+  }
+
+  #periods-table .date-column {
+    width: 130px;
+  }
+
+  #periods-table .price-column {
+    width: 105px;
+  }
+
+  #periods-table .actions-column {
+    width: 65px;
+  }
+
+  #periods-table input[type="number"] {
+    min-width: 0;
   }
 
   .header h1 {
