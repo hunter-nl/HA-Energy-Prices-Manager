@@ -4,6 +4,20 @@ If you find this project useful, consider supporting its development:
 <a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="180" height="50"></a>
 
 # Changelog
+## [v2.0.5](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v2.0.5)
+
+
+
+### 🐛 Fixes
+
+- [Fix: prevent mobile tariff input overlap](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/73) ([#73](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/73))
+
+
+
+
+
+
+
 ## [v2.0.4](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v2.0.4)
 
 
