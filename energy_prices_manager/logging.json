@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "disable_existing_loggers": false,
+  "formatters": {
+    "home_assistant": {
+      "format": "%(asctime)s %(levelname)s (%(threadName)s) [%(name)s] %(message)s"
+    }
+  },
+  "handlers": {
+    "default": {
+      "class": "logging.StreamHandler",
+      "formatter": "home_assistant",
+      "stream": "ext://sys.stderr"
+    },
+    "access": {
+      "class": "logging.StreamHandler",
+      "formatter": "home_assistant",
+      "stream": "ext://sys.stdout"
+    }
+  },
+  "loggers": {
+    "uvicorn": {
+      "handlers": ["default"],
+      "level": "INFO",
+      "propagate": false
+    },
+    "uvicorn.access": {
+      "handlers": ["access"],
+      "level": "INFO",
+      "propagate": false
+    }
+  },
+  "root": {
+    "handlers": ["default"],
+    "level": "INFO"
+  }
+}

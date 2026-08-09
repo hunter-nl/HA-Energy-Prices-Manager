@@ -23,6 +23,7 @@ RUN pip install --no-cache-dir \
     websockets==16.0
 
 COPY app /app/app
+COPY logging.json /app/logging.json
 COPY web /app/web
 COPY run.sh /run.sh
 
