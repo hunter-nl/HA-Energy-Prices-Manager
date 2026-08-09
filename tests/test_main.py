@@ -10,6 +10,11 @@ import pytest
 from energy_prices_manager.app import main
 
 
+def test_logging_uses_home_assistant_format() -> None:
+    """App log entries follow Home Assistant's standard format."""
+    assert main.LOG_FORMAT == "%(asctime)s %(levelname)s (%(threadName)s) [%(name)s] %(message)s"
+
+
 def test_validate_periods_sorts_valid_periods() -> None:
     """Valid periods are normalized and sorted by start date."""
     periods = main._validate_periods(

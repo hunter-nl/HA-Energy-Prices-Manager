@@ -21,6 +21,12 @@ from starlette.responses import Response
 from starlette.types import Scope
 from websockets.asyncio.client import connect
 
+LOG_FORMAT = "%(asctime)s %(levelname)s (%(threadName)s) [%(name)s] %(message)s"
+logging.basicConfig(
+    format=LOG_FORMAT,
+    level=logging.INFO,
+)
+
 DATA_FILE = Path("/data/energy_prices.json")
 CORE_API_URL = "http://supervisor/core/api"
 CORE_WS_URL = "ws://supervisor/core/websocket"
