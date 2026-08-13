@@ -13,6 +13,6 @@ shutdown() {
 
 trap shutdown TERM INT
 
-uvicorn app.main:app --host 0.0.0.0 --port 8099 &
+uvicorn app.main:app --host 0.0.0.0 --port 8099 --log-config /app/logging.json &
 child_pid=$!
 wait "$child_pid"
