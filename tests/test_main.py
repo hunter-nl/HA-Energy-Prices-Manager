@@ -181,3 +181,14 @@ def test_ingress_assets_are_not_cached() -> None:
     )
 
     assert response.headers["cache-control"] == "no-store, max-age=0"
+
+
+def test_ingress_uses_home_assistant_language_and_has_dutch_translations() -> None:
+    """Ingress labels follow the language chosen in Home Assistant."""
+    app_script = (main.WEB_DIR / "app.js").read_text()
+    frontend_translations = json.loads((main.WEB_DIR / "translations.json").read_text())
+
+    assert "window.parent.document.documentElement.lang" in app_script
+    assert "MutationObserver" in app_script
+    assert frontend_translations["nl"]["title"] == "Energieprijzenbeheer"
+    assert frontend_translations["nl"].keys() == frontend_translations["en"].keys()
