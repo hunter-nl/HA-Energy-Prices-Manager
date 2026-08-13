@@ -4,6 +4,20 @@ If you find this project useful, consider supporting its development:
 <a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="180" height="50"></a>
 
 # Changelog
+## [v2.2.1](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v2.2.1)
+
+
+
+### 🐛 Fixes
+
+- [Fix: wrap Dutch price headers](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/85) ([#85](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/85))
+
+
+
+
+
+
+
 ## [v2.2.0](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v2.2.0)
 
 
