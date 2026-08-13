@@ -15,6 +15,15 @@ def test_logging_uses_home_assistant_format() -> None:
     assert main.LOG_FORMAT == "%(asctime)s %(levelname)s (%(threadName)s) [%(name)s] %(message)s"
 
 
+def test_uvicorn_uses_home_assistant_log_format() -> None:
+    """Uvicorn access and server logs use the App's logging format."""
+    config = json.loads((Path(main.__file__).parents[1] / "logging.json").read_text())
+
+    assert config["formatters"]["home_assistant"]["format"] == main.LOG_FORMAT
+    assert config["loggers"]["uvicorn"]["handlers"] == ["default"]
+    assert config["loggers"]["uvicorn.access"]["handlers"] == ["access"]
+
+
 def test_validate_periods_sorts_valid_periods() -> None:
     """Valid periods are normalized and sorted by start date."""
     periods = main._validate_periods(
