@@ -191,4 +191,5 @@ def test_ingress_uses_home_assistant_language_and_has_dutch_translations() -> No
     assert "window.parent.document.documentElement.lang" in app_script
     assert "MutationObserver" in app_script
     assert frontend_translations["nl"]["title"] == "Energieprijzenbeheer"
+    assert frontend_translations["nl"]["import_electricity_t1_price"] == "Elektriciteits import T1 (€)"
     assert frontend_translations["nl"].keys() == frontend_translations["en"].keys()
