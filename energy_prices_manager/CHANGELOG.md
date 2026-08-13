@@ -4,6 +4,36 @@ If you find this project useful, consider supporting its development:
 <a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="180" height="50"></a>
 
 # Changelog
+## [v2.2.0](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v2.2.0)
+
+
+
+
+
+
+
+
+
+### 🐛 Fixes
+
+- [Fix: use Home Assistant language in ingress](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/83) ([#83](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/83))
+
+- [Fix: format Uvicorn logs like Home Assistant](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/81) ([#81](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/81))
+
+
+
+
+
+### ⬆️ Dependencies
+
+- [Chore(deps):(deps): bump the dependencies group with 2 updates](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/82) ([#82](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/82))
+
+
+
+
+
+
+
 ## [v2.1.1](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v2.1.1)
 
 
