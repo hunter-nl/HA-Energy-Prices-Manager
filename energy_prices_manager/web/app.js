@@ -10,6 +10,10 @@ const API_BASE_PATH = "api";
 let periods = [];
 let originalPeriods = [];
 let translations = {};
+let translationCatalog = {};
+let language = "en";
+let activePeriod = null;
+let hasLoadedPeriods = false;
 
 function t(key, replacements = {}) {
   let value = translations[key] ?? key;
@@ -19,18 +23,49 @@ function t(key, replacements = {}) {
   return value;
 }
 
-async function loadTranslations() {
-  const response = await fetch("translations.json");
-  if (!response.ok) throw new Error("Unable to load translations.");
-  const allTranslations = await response.json();
-  const language = navigator.language?.toLowerCase().startsWith("nl")
-    ? "nl"
-    : "en";
+function homeAssistantLanguage() {
+  try {
+    return window.parent.document.documentElement.lang || navigator.language;
+  } catch (error) {
+    console.warn("Unable to read the Home Assistant language", error);
+    return navigator.language;
+  }
+}
+
+function languageCode() {
+  return homeAssistantLanguage()?.toLowerCase().startsWith("nl") ? "nl" : "en";
+}
+
+function applyTranslations(allTranslations) {
+  language = languageCode();
+  translationCatalog = allTranslations;
   translations = allTranslations[language] ?? allTranslations.en;
   document.documentElement.lang = language;
   document.querySelectorAll("[data-i18n]").forEach((element) => {
     element.textContent = t(element.dataset.i18n);
   });
+  if (hasLoadedPeriods) {
+    renderTable();
+    renderCurrentInfo(activePeriod);
+  }
+}
+
+async function loadTranslations() {
+  const response = await fetch("translations.json");
+  if (!response.ok) throw new Error("Unable to load translations.");
+  applyTranslations(await response.json());
+}
+
+function observeHomeAssistantLanguage() {
+  try {
+    const root = window.parent.document.documentElement;
+    new MutationObserver(() => {
+      const nextLanguage = languageCode();
+      if (nextLanguage !== language) applyTranslations(translationCatalog);
+    }).observe(root, { attributes: true, attributeFilter: ["lang"] });
+  } catch (error) {
+    console.warn("Unable to observe the Home Assistant language", error);
+  }
 }
 
 // Listen for system theme changes (when HA theme changes)
@@ -46,7 +81,7 @@ function setStatus(message, type = "info") {
 }
 
 function formatCurrency(value) {
-  return Number(value).toLocaleString(undefined, {
+  return Number(value).toLocaleString(language, {
     minimumFractionDigits: 5,
     maximumFractionDigits: 5,
   });
@@ -146,6 +181,7 @@ function updateSaveButton() {
 }
 
 function renderCurrentInfo(active) {
+  activePeriod = active;
   infoCard.replaceChildren();
   if (!active || active.detail) {
     const emptyState = document.createElement("div");
@@ -296,9 +332,9 @@ async function loadPeriods() {
     if (!periodRes.ok) throw new Error("Unable to load saved periods.");
     periods = await periodRes.json();
     originalPeriods = periods.map((p) => ({ ...p }));
+    hasLoadedPeriods = true;
     renderTable();
-    const currentData = currentRes.ok ? await currentRes.json() : null;
-    renderCurrentInfo(currentData);
+    renderCurrentInfo(currentRes.ok ? await currentRes.json() : null);
   } catch (error) {
     setStatus(t("load_error"), "error");
     console.error(error);
@@ -370,6 +406,7 @@ saveBtn.addEventListener("click", async () => {
 async function initialize() {
   try {
     await loadTranslations();
+    observeHomeAssistantLanguage();
   } catch (error) {
     console.error(error);
   }
