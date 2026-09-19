@@ -1,5 +1,6 @@
 """Tests for the App's price-period and helper configuration logic."""
 
+import asyncio
 import json
 import os
 from datetime import date
@@ -167,6 +168,35 @@ def test_helper_configuration_matches_energy_dashboard_requirements() -> None:
     assert gas["min"] == 0
     assert gas["max"] == 5
     assert gas["unit_of_measurement"] == "EUR/m³"
+
+
+def test_helper_initialization_retries_when_home_assistant_is_unavailable(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A transient Home Assistant restart must not stop the App from starting."""
+    attempts = 0
+    delays: list[int] = []
+
+    async def ensure_helpers() -> None:
+        nonlocal attempts
+        attempts += 1
+        if attempts == 1:
+            raise main.WebSocketException("server rejected WebSocket connection: HTTP 502")
+
+    async def sync_helpers() -> None:
+        return None
+
+    async def sleep(delay: int) -> None:
+        delays.append(delay)
+
+    monkeypatch.setattr(main, "_ensure_helpers", ensure_helpers)
+    monkeypatch.setattr(main, "_sync_helpers", sync_helpers)
+    monkeypatch.setattr(main.asyncio, "sleep", sleep)
+
+    asyncio.run(main._initialize_helpers())
+
+    assert attempts == 2
+    assert delays == [main.STARTUP_RETRY_SECONDS]
 
 
 def test_ingress_assets_are_not_cached() -> None:
