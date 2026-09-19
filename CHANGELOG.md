@@ -5,6 +5,16 @@ If you find this project useful, consider supporting its development:
 <a href="https://www.buymeacoffee.com/hunter.nl" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="180" height="50"></a>
 
 # Changelog
+## [v2.2.3](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v2.2.3)
+
+
+### 🐛 Fixes
+- [Fix: retry helper initialization until Home Assistant is ready](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/91) ([#91](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/91))
+
+### ⬆️ Dependencies
+- [Chore(deps):(deps): bump home-assistant/builder from 2026.06.0 to 2026.09.0 in the github-actions group](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/90) ([#90](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/90))
+- [Chore(deps):(deps): bump websockets from 17.0.1 to 17.1 in the dependencies group](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/89) ([#89](https://github.com/hunter-nl/HA-Energy-Prices-Manager/pull/89))
+
 ## [v2.2.2](https://github.com/hunter-nl/HA-Energy-Prices-Manager/releases/tag/v2.2.2)
 
 
