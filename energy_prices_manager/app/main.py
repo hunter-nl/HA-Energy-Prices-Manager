@@ -20,6 +20,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from starlette.responses import Response
 from starlette.types import Scope
 from websockets.asyncio.client import connect
+from websockets.exceptions import WebSocketException
 
 LOG_FORMAT = "%(asctime)s %(levelname)s (%(threadName)s) [%(name)s] %(message)s"
 logging.basicConfig(
@@ -32,6 +33,8 @@ CORE_API_URL = "http://supervisor/core/api"
 CORE_WS_URL = "ws://supervisor/core/websocket"
 WEB_DIR = Path(__file__).parents[1] / "web"
 LOGGER = logging.getLogger(__name__)
+STARTUP_RETRY_SECONDS = 10
+HOME_ASSISTANT_ERRORS = (OSError, RuntimeError, TimeoutError, urllib.error.URLError, WebSocketException)
 LEGACY_PERIOD_FIELDS = (
     ("t1", "import_t1"),
     ("t2", "import_t2"),
@@ -234,29 +237,45 @@ async def _sync_helpers() -> None:
         await asyncio.to_thread(_set_helper_value, helper["entity_id"], getattr(period, helper["price_key"]))
 
 
+async def _initialize_helpers() -> None:
+    """Initialize helpers once Home Assistant's API is available."""
+    while True:
+        try:
+            await _ensure_helpers()
+            await _sync_helpers()
+        except HOME_ASSISTANT_ERRORS as err:
+            LOGGER.warning(
+                "Home Assistant is not ready; retrying helper initialization in %s seconds: %s",
+                STARTUP_RETRY_SECONDS,
+                err,
+            )
+            await asyncio.sleep(STARTUP_RETRY_SECONDS)
+        else:
+            return
+
+
 async def _daily_sync() -> None:
     while True:
         tomorrow = datetime.combine(date.today() + timedelta(days=1), time.min)
         await asyncio.sleep((tomorrow - datetime.now()).total_seconds() + 1)
         try:
             await _sync_helpers()
-        except (OSError, RuntimeError, urllib.error.URLError) as err:
+        except HOME_ASSISTANT_ERRORS as err:
             LOGGER.exception("Unable to update price helpers: %s", err)
 
 
 @asynccontextmanager
 async def _lifespan(_: FastAPI):
     DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
-    try:
-        await _ensure_helpers()
-        await _sync_helpers()
-    except (OSError, RuntimeError, urllib.error.URLError) as err:
-        LOGGER.exception("Unable to initialize Home Assistant helpers: %s", err)
-    task = asyncio.create_task(_daily_sync())
+    initialization_task = asyncio.create_task(_initialize_helpers())
+    daily_sync_task = asyncio.create_task(_daily_sync())
     yield
-    task.cancel()
+    initialization_task.cancel()
+    daily_sync_task.cancel()
     with contextlib.suppress(asyncio.CancelledError):
-        await task
+        await initialization_task
+    with contextlib.suppress(asyncio.CancelledError):
+        await daily_sync_task
 
 
 app = FastAPI(title="Energy Prices Manager", lifespan=_lifespan)
@@ -285,7 +304,7 @@ async def save_periods(periods: list[Period]) -> dict[str, int | str]:
     _save_periods(periods)
     try:
         await _sync_helpers()
-    except (OSError, RuntimeError, urllib.error.URLError) as err:
+    except HOME_ASSISTANT_ERRORS as err:
         LOGGER.exception("Saved periods but could not update helpers: %s", err)
         raise HTTPException(status_code=503, detail=["Periods were saved, but helpers could not be updated."]) from err
     return {"status": "ok", "saved": len(periods)}
