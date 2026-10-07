@@ -6,8 +6,8 @@ readme = "README.md"
 requires-python = ">=3.14.2"
 license = "AGPL-3.0-only"
 dependencies = [
-  "fastapi==0.141.1",
-  "websockets==17.1",
+  "fastapi==0.142.2",
+  "websockets==17.2",
 ]
 
 [project.optional-dependencies]
