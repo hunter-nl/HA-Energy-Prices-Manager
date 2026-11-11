@@ -1,4 +1,4 @@
-FROM python:3.14-slim
+FROM python:3.15-slim
 
 ARG BUILD_ARCH=amd64
 ARG BUILD_VERSION=dev
